@@ -1,4 +1,4 @@
-// Os arquivos de cabeçalho
+// Os arquivos de cabeÃ§alho
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 
@@ -7,13 +7,14 @@
 
 
 // Atributos da tela
-const int LARGURA_TELA = 1024;
-const int ALTURA_TELA = 565;
+const int LARGURA_TELA = 1280;
+const int ALTURA_TELA = 720;
 
 int main(void)
 {
     ALLEGRO_DISPLAY *janela = NULL;
-    ALLEGRO_BITMAP *imagem = NULL;
+    ALLEGRO_BITMAP *splash_screen = NULL;
+    ALLEGRO_BITMAP *imagem2= NULL;
     ALLEGRO_EVENT_QUEUE *fila_eventos = NULL;
 
     if (!al_init())
@@ -35,8 +36,9 @@ int main(void)
         return -1;
     }
 
-    imagem = al_load_bitmap("Imagens/EsbocoMain.png");
-    if (!imagem)
+    splash_screen = al_load_bitmap("Imagens/SplashTeste.png");
+    imagem2 = al_load_bitmap("Imagens/Tela1.png");
+    if (!splash_screen)
     {
         fprintf(stderr, "Falha ao carregar o arquivo de imagem.\n");
         al_destroy_display(janela);
@@ -53,8 +55,10 @@ int main(void)
 
     al_register_event_source(fila_eventos, al_get_display_event_source(janela));
 
-    al_draw_bitmap(imagem, 0, 0, 0);
-
+    al_draw_bitmap(splash_screen, 0, 0, 0);
+    al_flip_display();
+    al_rest(3.0);
+    al_draw_bitmap(imagem2, 0, 0, 0);
     al_flip_display();
 
     while (1)
@@ -69,9 +73,6 @@ int main(void)
         {
             break;
         }
-
-        al_draw_bitmap(imagem, 0, 0, 0);
-        al_flip_display();
     }
 
     al_destroy_display(janela);
