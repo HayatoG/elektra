@@ -1,0 +1,54 @@
+-- Configurando GIT -- 
+
+Baixar Git!!!
+
+Passo 1:
+Abrir GitHub ir na parte de Settings -> SSH and GPC keys.
+Abrir o terminal e digitar: ssh-keygen
+Dar enter até a liberação da chave
+Quando mostar o caminho da chave com o .pub, digitar no terminal: cat caminho_da_chave.pub
+Copiar aquela chave e colar no GitHub na parte da SSH.
+
+Passo 2:
+Criar uma pasta em algum lugar do computador, dentro dessa pasta clicar com o botão direito do mouse, e clicar em Git BASH Here.
+Dentro do Git, dar um: 
+git clone https://github.com/HayatoG/elektra.git 
+Continuando...
+dar um:
+cd /elektra
+
+Agora todo e qualquer comando será feito dentro desse caminho "suapasta/elektra" com o git BASH
+
+-- Dando commit, push e pull --
+
+Bom, cada tela que iremos fazer terá sua própria issue/branch, ou seja, cada coisa em seu lugar.
+Para acessar uma branch, dentro do git bash:
+
+git checkout SMARTGATOR-NUMERO_DA_BRANCH
+
+Caso não encontre a branch: 
+
+git fetch --all
+git checkout SMARTGATOR-NUMERO_DA_BRANCH
+
+Caso seja para criar uma branch:
+
+git checkout -b SMARTGATOR-NUMERO_DA_BRANCH
+
+A partir dai você já estará programando em cima dessa branch, nunca esqueça de entrar na branch pra nao sobreescrever a master!!!
+Após desenvolver, será necessario dar um push pra que os arquivos sejam atualizados na sua branch do GitHub.
+Pra isso você precisa fazer, dentro do git bash e já na sua branch:
+
+git add . 
+git commit -m "SMARTGATOR-NUMERO_DA_BRANCH - Comentario sobre o que voce fez no codigo"
+git push origin SMARTGATOR-NUMERO_DA_BRANCH
+
+Pronto, tudo o que voce fez subiu pro GitHub pra sua branch!
+
+Sempre que for entrar pra atualizar algo, é importante dar o pull pra que nada sobreescreva nada e fique certinho, dentro da sua pasta e do git bash, dentro da sua issue, dar um:
+
+git pull origin SMARTGATOR-NUMERO_DA_BRANCH
+
+E pronto, agora está atualizado no seu computador!
+
+*Conforme as telas forem sendo criadas uma vai depender da outra, isso será unindo as issues principais, que no caso é a 1 sendo a Tela Inicial, subindo ela pra master com o pull request(Que por enquanto não é necessario explicar)*
