@@ -13,7 +13,8 @@ const ALLEGRO_BITMAP *IMAGEM_TELAOPCOES = NULL;
 const ALLEGRO_EVENT_QUEUE *fila_eventos = NULL;
 const ALLEGRO_BITMAP *botao_sair = NULL, *area_jogar = 0;
 const ALLEGRO_EVENT evento;
-
+const ALLEGRO_AUDIO_STREAM *musica = NULL;
+const ALLEGRO_SAMPLE *somefeitos = NULL;
 
 
 
