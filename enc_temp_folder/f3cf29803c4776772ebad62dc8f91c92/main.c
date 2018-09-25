@@ -123,7 +123,6 @@ int main(void)
 				else if (btn_tutorial) {
 					al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
 					al_flip_display();
-					tela = 3
 				}break;
 			}
 			case 2:
@@ -151,11 +150,7 @@ int main(void)
 						al_flip_display();
 						tela = 1;
 					}
-				}
-				break;
-			case 3:
-				al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
-				al_flip_display();
+				}break;
 			
 		}
 		
