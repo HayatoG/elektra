@@ -1,10 +1,26 @@
-﻿  main.c
-d:\pi\git\elektra\elektra\main.c(34): warning C4090: 'função': qualificadores 'const' diferentes
+﻿  Funcoes.c
+d:\pi\git\elektra\elektra\funcoes.c(3): warning C4098: 'botaoIniciar': função 'void' retornando um valor
+  main.c
 d:\pi\git\elektra\elektra\main.c(42): warning C4090: 'função': qualificadores 'const' diferentes
-d:\pi\git\elektra\elektra\main.c(46): warning C4090: 'função': qualificadores 'const' diferentes
-d:\pi\git\elektra\elektra\main.c(48): warning C4090: 'função': qualificadores 'const' diferentes
-d:\pi\git\elektra\elektra\main.c(51): warning C4090: 'função': qualificadores 'const' diferentes
-d:\pi\git\elektra\elektra\main.c(60): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(47): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(52): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(54): warning C4090: 'função': qualificadores 'const' diferentes
 d:\pi\git\elektra\elektra\main.c(68): warning C4090: 'função': qualificadores 'const' diferentes
-d:\pi\git\elektra\elektra\main.c(69): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(75): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(79): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(80): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(82): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(86): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(89): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(96): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(105): warning C4013: 'botaoIniciar' indefinido; assumindo extern retornando int
+d:\pi\git\elektra\elektra\main.c(111): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(115): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(124): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(127): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(131): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(135): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(141): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(142): warning C4090: 'função': qualificadores 'const' diferentes
+  Gerando Código...
   elektra.vcxproj -> D:\PI\git\elektra\Debug\elektra.exe
