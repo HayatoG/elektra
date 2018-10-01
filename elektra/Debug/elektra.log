@@ -1,17 +1,29 @@
-﻿  Opcoes.c
-d:\pi\git\elektra\elektra\opcoes.c(9): warning C4013: 'botoesMenuIniciar' indefinido; assumindo extern retornando int
-d:\pi\git\elektra\elektra\opcoes.c(13): warning C4090: 'função': qualificadores 'const' diferentes
-d:\pi\git\elektra\elektra\opcoes.c(17): warning C4090: 'função': qualificadores 'const' diferentes
-d:\pi\git\elektra\elektra\opcoes.c(27): warning C4090: 'função': qualificadores 'const' diferentes
-d:\pi\git\elektra\elektra\opcoes.c(29): warning C4033: 'telaOpcoes' deve retornar um valor
-d:\pi\git\elektra\elektra\opcoes.c(32): warning C4716: 'telaOpcoes': deve retornar um valor
-Opcoes.obj : error LNK2005: _LARGURA_TELA já definida no main.obj
-Opcoes.obj : error LNK2005: _ALTURA_TELA já definida no main.obj
-Opcoes.obj : error LNK2005: _janela já definida no main.obj
-Opcoes.obj : error LNK2005: _IMAGEM_SPLASHSCREEN já definida no main.obj
-Opcoes.obj : error LNK2005: _IMAGEM_MENUINICIAL já definida no main.obj
-Opcoes.obj : error LNK2005: _IMAGEM_TELAOPCOES já definida no main.obj
-Opcoes.obj : error LNK2005: _fila_eventos já definida no main.obj
-Opcoes.obj : error LNK2005: _botao_sair já definida no main.obj
-Opcoes.obj : error LNK2005: _area_jogar já definida no main.obj
-D:\PI\git\elektra\Debug\elektra.exe : fatal error LNK1169: encontrados um ou mais símbolos múltiplos definidos
+﻿  main.c
+d:\pi\git\elektra\elektra\main.c(29): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(33): warning C4013: 'error_msg' indefinido; assumindo extern retornando int
+d:\pi\git\elektra\elektra\main.c(34): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(39): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(41): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(54): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(61): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(65): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(66): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(68): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(72): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(76): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(79): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(81): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(91): warning C4013: 'botoesMenuIniciar' indefinido; assumindo extern retornando int
+d:\pi\git\elektra\elektra\main.c(97): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(101): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(112): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(115): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(119): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(124): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(136): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(140): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(150): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(157): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(168): warning C4090: 'função': qualificadores 'const' diferentes
+d:\pi\git\elektra\elektra\main.c(169): warning C4090: 'função': qualificadores 'const' diferentes
+  elektra.vcxproj -> D:\PI\git\elektra\Debug\elektra.exe
