@@ -2,21 +2,8 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_native_dialog.h>
-
-#include <allegro5/allegro_primitives.h>
 #include "Constantes.h"
 #include <stdio.h>
-//Declaração dos lugares dos botões
-/*#define btn_jogar = (evento.mouse.x >= 850 && evento.mouse.x <= 1250 && evento.mouse.y >= 230 && evento.mouse.y <= 320);
-#define btn_opcoes = evento.mouse.x >= 970 && evento.mouse.x <= 1250 && evento.mouse.y >= 380 && evento.mouse.y <= 430;
-#define btn_tutorial = evento.mouse.x >= 900 && evento.mouse.x <= 1265 && evento.mouse.y >= 500 && evento.mouse.y <= 540;*/
-
-
-void error_msg(char *text) {
-	al_show_native_message_box(NULL, "ERRO",
-		"Ocorreu o seguinte erro e o programa sera finalizado:",
-		text, NULL, ALLEGRO_MESSAGEBOX_ERROR);
-}
 
 int main(void)
 {
@@ -54,13 +41,12 @@ int main(void)
 		al_destroy_display(janela);
 		return -1;
 	}
-
-
+	
 	// Declaração de imagens usadas
 	// Se possível seguir o padrão (IMAGEM_NOMEDAIMAGEM)
 	IMAGEM_SPLASHSCREEN = al_load_bitmap("Imagens/SplashScreen.png");
-	IMAGEM_MENUINICIAL = al_load_bitmap("Imagens/MenuInicial.png");
-	IMAGEM_TELAOPCOES = al_load_bitmap("Imagens/TelaOpcoes.png");
+	IMAGEM_MENUINICIAL  = al_load_bitmap("Imagens/MenuInicial.png");
+	IMAGEM_TELAOPCOES   = al_load_bitmap("Imagens/TelaOpcoes.png");
 
     // Declarar neste if com o || a cada imagem adicionada, para que caso haja erro, ele pare aqui.
     if (!IMAGEM_SPLASHSCREEN || !IMAGEM_MENUINICIAL || !IMAGEM_TELAOPCOES){
@@ -85,12 +71,11 @@ int main(void)
 
     al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
     al_flip_display();
+	int tela = 1;
 
 	al_register_event_source(fila_eventos, al_get_mouse_event_source());
 
     while (!sair){
-        ALLEGRO_EVENT evento;
-        ALLEGRO_TIMEOUT timeout;
         al_init_timeout(&timeout, 0.05);
 
         int tem_eventos = al_wait_for_event_until(fila_eventos, &evento, &timeout);
@@ -99,45 +84,84 @@ int main(void)
         {
             break;
         }
-
-		if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
-		{
-			int btn_jogar = botoesMenuIniciar(evento, 850, 1250, 230, 320);
-			int btn_opcoes = botoesMenuIniciar(evento, 970, 1250, 380, 430);
-			int btn_tutorial = botoesMenuIniciar(evento, 900, 1265, 500, 540);
-
-			if (btn_jogar || btn_opcoes || btn_tutorial)
+		switch (tela) {
+		case 1:
+			if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
 			{
-				al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
-			}
-			else
-			{
-				al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
-			}
+				int btn_jogar = botoesMenuIniciar(evento, 850, 1250, 230, 320);
+				int btn_opcoes = botoesMenuIniciar(evento, 970, 1250, 380, 430);
+				int btn_tutorial = botoesMenuIniciar(evento, 900, 1265, 500, 540);
 
-		}
-		else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) 
-		{
-			int btn_jogar = botoesMenuIniciar(evento, 850, 1250, 230, 320);
-			int btn_opcoes = botoesMenuIniciar(evento, 970, 1250, 380, 430);
-			int btn_tutorial = botoesMenuIniciar(evento, 900, 1265, 500, 540);
-			
-			if (btn_jogar) {
-				al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
-				al_flip_display();
-				al_rest(3.0);
+				if (btn_jogar || btn_opcoes || btn_tutorial)
+				{
+					al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
+				}
+				else
+				{
+					al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+				}
+
+			}
+			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
+			{
+				int btn_jogar = botoesMenuIniciar(evento, 850, 1250, 230, 320);
+				int btn_opcoes = botoesMenuIniciar(evento, 970, 1250, 380, 430);
+				int btn_tutorial = botoesMenuIniciar(evento, 900, 1265, 500, 540);
+
+				if (btn_jogar) {
+					al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
+					al_flip_display();
+					al_rest(3.0);
+					al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
+					al_flip_display();
+				}
+				else if (btn_opcoes) {
+					al_draw_bitmap(IMAGEM_TELAOPCOES, 0, 0, 0);
+					al_flip_display();
+					tela = 2;
+				}
+				else if (btn_tutorial) {
+					al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
+					al_flip_display();
+					tela = 3
+				}break;
+			}
+			case 2:
+				if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
+				{
+					int btn_voltar = botoesMenuIniciar(evento, 30, 90, 90, 140);
+
+					if (btn_voltar)
+					{
+						al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
+					}
+					else
+					{
+						al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+					}
+
+				}
+				else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
+				{
+					int btn_voltar = botoesMenuIniciar(evento, 30, 90, 90, 140);
+
+					if (btn_voltar)
+					{
+						al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
+						al_flip_display();
+						tela = 1;
+					}
+				}
+				break;
+			case 3:
 				al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
 				al_flip_display();
-			}
-			else if (btn_opcoes) {
-				al_draw_bitmap(IMAGEM_TELAOPCOES, 0, 0, 0);
-				al_flip_display();
-			}
-			else if (btn_tutorial) {
-				al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
-				al_flip_display();
-			}
-		}    
+			
+		}
+		
+
+
+		
 	}
 
     al_destroy_display(janela);

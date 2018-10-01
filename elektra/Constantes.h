@@ -1,4 +1,4 @@
-//Aruqivo para declaração de CONSTANTES do SmartGator
+//Arquivo para declaração de CONSTANTES do SmartGator
 //Constantes devem ser declaradas com letras maiusculas
 // Atributos da tela
 
@@ -13,7 +13,15 @@ const ALLEGRO_BITMAP *IMAGEM_TELAOPCOES = NULL;
 const ALLEGRO_EVENT_QUEUE *fila_eventos = NULL;
 const ALLEGRO_BITMAP *botao_sair = NULL, *area_jogar = 0;
 const ALLEGRO_EVENT evento;
+const ALLEGRO_TIMEOUT timeout;
 
+//Definindo Estado das Telas
 
+#define Tela1 = MenuInicial;
+#define Tela2 = Opcoes;
+#define Tela3 = Tutorial;
+#define Tela4 = Fase1;
+#define Tela5 = Fase2;
+#define Tela6 = Fase3;
 
 
