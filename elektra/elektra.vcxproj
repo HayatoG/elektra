@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="Funcoes.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="Opcoes.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constantes.h" />

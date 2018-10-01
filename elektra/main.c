@@ -123,39 +123,16 @@ int main(void)
 				else if (btn_tutorial) {
 					al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
 					al_flip_display();
-					tela = 3
-				}break;
-			}
+					tela = 3;
+				}
+			}break;
 			case 2:
-				if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
-				{
-					int btn_voltar = botoesMenuIniciar(evento, 30, 90, 90, 140);
-
-					if (btn_voltar)
-					{
-						al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
-					}
-					else
-					{
-						al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
-					}
-
-				}
-				else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
-				{
-					int btn_voltar = botoesMenuIniciar(evento, 30, 90, 90, 140);
-
-					if (btn_voltar)
-					{
-						al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
-						al_flip_display();
-						tela = 1;
-					}
-				}
+				telaOpcoes(evento, janela);
 				break;
 			case 3:
 				al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
 				al_flip_display();
+				break;
 			
 		}
 		
