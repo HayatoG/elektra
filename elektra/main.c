@@ -21,14 +21,6 @@
 const int LARGURA_TELA = 1280;
 const int ALTURA_TELA = 720;
 
-
-int botoesMenuIniciar(ALLEGRO_EVENT e, int x1, int x2, int y1, int y2) {
-	return e.mouse.x >= x1 && e.mouse.x <= x2 && e.mouse.y >= y1 && e.mouse.y <= y2;
-}
-
-int main()
-{
-
 //Declaração das constantes de funções Allegro
 ALLEGRO_DISPLAY *janela = NULL;
 ALLEGRO_BITMAP *IMAGEM_SPLASHSCREEN = NULL;
@@ -40,12 +32,28 @@ ALLEGRO_EVENT evento;
 ALLEGRO_AUDIO_STREAM *musica = NULL;
 ALLEGRO_SAMPLE *somefeitos = NULL;
 
+
+int botoesMenuIniciar(ALLEGRO_EVENT e, int x1, int x2, int y1, int y2) {
+	return e.mouse.x >= x1 && e.mouse.x <= x2 && e.mouse.y >= y1 && e.mouse.y <= y2;
+}
+
+int main()
+{
+
 	int sair = 0;
 
-   al_init();
-   al_init_image_addon();
+	al_init();
+	al_init_image_addon();
+	al_install_audio();
+	al_init_acodec_addon();
+	al_reserve_samples(1);
 
+	musica = al_load_audio_stream("Sons/MarioTesteSound.wav", 4, 1024);
     janela = al_create_display(LARGURA_TELA, ALTURA_TELA);
+
+	al_attach_audio_stream_to_mixer(musica, al_get_default_mixer());
+    al_set_audio_stream_playing(musica, true);
+
 
     if (!janela){
         fprintf(stderr, "Falha ao criar janela.\n");
