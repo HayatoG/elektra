@@ -4,35 +4,35 @@
 #include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
-
 #include <allegro5/allegro_primitives.h>
-#include "Constantes.h"
 #include <stdio.h>
-//Declaração dos lugares dos botões
-/*#define btn_jogar = (evento.mouse.x >= 850 && evento.mouse.x <= 1250 && evento.mouse.y >= 230 && evento.mouse.y <= 320);
-#define btn_opcoes = evento.mouse.x >= 970 && evento.mouse.x <= 1250 && evento.mouse.y >= 380 && evento.mouse.y <= 430;
-#define btn_tutorial = evento.mouse.x >= 900 && evento.mouse.x <= 1265 && evento.mouse.y >= 500 && evento.mouse.y <= 540;*/
 
 
-void error_msg(char *text) {
-	al_show_native_message_box(NULL, "ERRO",
-		"Ocorreu o seguinte erro e o programa sera finalizado:",
-		text, NULL, ALLEGRO_MESSAGEBOX_ERROR);
+const int LARGURA_TELA = 1280;
+const int ALTURA_TELA = 720;
+
+int botoesMenuIniciar(ALLEGRO_EVENT e, int x1, int x2, int y1, int y2) {
+	return e.mouse.x >= x1 && e.mouse.x <= x2 && e.mouse.y >= y1 && e.mouse.y <= y2;
 }
 
 int main(void)
 {
+
+//Declaração das constantes de funções Allegro
+ALLEGRO_DISPLAY *janela = NULL;
+ALLEGRO_BITMAP *IMAGEM_SPLASHSCREEN = NULL;
+ALLEGRO_BITMAP *IMAGEM_MENUINICIAL = NULL;
+ALLEGRO_BITMAP *IMAGEM_TELAOPCOES = NULL;
+ALLEGRO_EVENT_QUEUE *fila_eventos = NULL;
+ALLEGRO_BITMAP *botao_sair = NULL, *area_jogar = 0;
+ALLEGRO_EVENT evento;
+ALLEGRO_AUDIO_STREAM *musica = NULL;
+ALLEGRO_SAMPLE *somefeitos = NULL;
+
 	int sair = 0;
 
-    if (!al_init()){
-        fprintf(stderr, "Falha ao inicializar a Allegro.\n");
-        return -1;
-    }
-
-    if (!al_init_image_addon()){
-        fprintf(stderr, "Falha ao inicializar add-on allegro_image.\n");
-        return -1;
-    }
+   al_init();
+   al_init_image_addon();
 
     janela = al_create_display(LARGURA_TELA, ALTURA_TELA);
 
@@ -44,20 +44,9 @@ int main(void)
 	al_set_window_title(janela, "SmartGator");
 
 	// Torna apto o uso de mouse na aplicação
-	if (!al_install_mouse()) {
-		error_msg("Falha ao inicializar o mouse");
-		al_destroy_display(janela);
-		return -1;
-	}
+	al_install_mouse();
 
-	// Atribui o cursor padrão do sistema para ser usado
-	if (!al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT)) {
-		error_msg("Falha ao atribuir ponteiro do mouse");
-		al_destroy_display(janela);
-		return -1;
-	}
-
-
+	al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
 	// Declaração de imagens usadas
 	// Se possível seguir o padrão (IMAGEM_NOMEDAIMAGEM)
 	IMAGEM_SPLASHSCREEN = al_load_bitmap("Imagens/SplashScreen.png");
