@@ -1,3 +1,5 @@
+// Parâmetro para rodar:
+//gcc -lallegro -lallegro_main -lallegro_image -lallegro_ttf -lallegro_font -lallegro_primitives -lallegro_audio -lallegro_acodec -o smart main.c
 // Os arquivos de cabeçalho
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
@@ -6,6 +8,14 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_primitives.h>
 #include <stdio.h>
+
+
+#define Tela1 = MenuInicial;
+#define Tela2 = Opcoes;
+#define Tela3 = Tutorial;
+#define Tela4 = Fase1;
+#define Tela5 = Fase2;
+#define Tela6 = Fase3;
 
 
 const int LARGURA_TELA = 1280;
@@ -18,16 +28,6 @@ int botoesMenuIniciar(ALLEGRO_EVENT e, int x1, int x2, int y1, int y2) {
 
 int main()
 {
-
-
-
-#define Tela1 = MenuInicial;
-#define Tela2 = Opcoes;
-#define Tela3 = Tutorial;
-#define Tela4 = Fase1;
-#define Tela5 = Fase2;
-#define Tela6 = Fase3;
-
 
 //Declaração das constantes de funções Allegro
 ALLEGRO_DISPLAY *janela = NULL;
