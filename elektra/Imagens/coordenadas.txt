@@ -1,0 +1,49 @@
+Coordenadas:
+
+Botão Som Desligado: 
+CIMA - xesq - 520; yesq - 260; xdir - 610; ydir - 260; 
+BAIXO - xesq - 520 ; yesq - 340; xdir - 610; ydir - 340;
+
+
+Botão Som Ligado:
+CIMA - xesq - 670; yesq - 260; xdir - 770; ydir - 260;
+BAIXO - xesq - 670; yesq - 340; xdir - 770; ydir - 340;
+
+Tela 1 - Pântano:
+
+Primeira casa (Vitórias Régias):
+
+CIMA - xesq - 20; yesq - 590; xdir - 90; ydir - 590;
+BAIXO - xesq - 20; yesq - 630; xdir - 90; ydir - 630;
+
+Troncos:
+
+Primeira casa:
+
+CIMA - xesq - ; yesq - ; xdir -; ydir - ;
+BAIXO - xesq - ; yesq - ; xdir -; ydir - ;
+
+Segunda casa:
+
+CIMA - xesq - ; yesq - ; xdir -; ydir - ;
+BAIXO - xesq - ; yesq - ; xdir -; ydir - ;
+
+Terceira casa:
+
+CIMA - xesq - ; yesq - ; xdir -; ydir - ;
+BAIXO - xesq - ; yesq - ; xdir -; ydir - ;
+
+Quarta casa:
+
+CIMA - xesq - ; yesq - ; xdir -; ydir - ;
+BAIXO - xesq - ; yesq - ; xdir -; ydir - ;
+
+Quinta casa:
+
+CIMA - xesq - ; yesq - ; xdir -; ydir - ;
+BAIXO - xesq - ; yesq - ; xdir -; ydir - ;
+
+Sexta casa:
+
+CIMA - xesq - ; yesq - ; xdir -; ydir - ;
+BAIXO - xesq - ; yesq - ; xdir -; ydir - ;
