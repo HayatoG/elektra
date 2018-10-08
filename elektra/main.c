@@ -11,12 +11,23 @@
 const int LARGURA_TELA = 1280;
 const int ALTURA_TELA = 720;
 
+
 int botoesMenuIniciar(ALLEGRO_EVENT e, int x1, int x2, int y1, int y2) {
 	return e.mouse.x >= x1 && e.mouse.x <= x2 && e.mouse.y >= y1 && e.mouse.y <= y2;
 }
 
-int main(void)
+int main()
 {
+
+
+
+#define Tela1 = MenuInicial;
+#define Tela2 = Opcoes;
+#define Tela3 = Tutorial;
+#define Tela4 = Fase1;
+#define Tela5 = Fase2;
+#define Tela6 = Fase3;
+
 
 //Declaração das constantes de funções Allegro
 ALLEGRO_DISPLAY *janela = NULL;
@@ -76,6 +87,7 @@ ALLEGRO_SAMPLE *somefeitos = NULL;
 
     al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
     al_flip_display();
+    	int tela = 1;
 
 	al_register_event_source(fila_eventos, al_get_mouse_event_source());
 
@@ -90,45 +102,82 @@ ALLEGRO_SAMPLE *somefeitos = NULL;
         {
             break;
         }
-
-		if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
-		{
-			int btn_jogar = botoesMenuIniciar(evento, 850, 1250, 230, 320);
-			int btn_opcoes = botoesMenuIniciar(evento, 970, 1250, 380, 430);
-			int btn_tutorial = botoesMenuIniciar(evento, 900, 1265, 500, 540);
-
-			if (btn_jogar || btn_opcoes || btn_tutorial)
+		switch (tela) {
+		case 1:
+			if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
 			{
-				al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
-			}
-			else
-			{
-				al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
-			}
+				int btn_jogar = botoesMenuIniciar(evento, 850, 1250, 230, 320);
+				int btn_opcoes = botoesMenuIniciar(evento, 970, 1250, 380, 430);
+				int btn_tutorial = botoesMenuIniciar(evento, 900, 1265, 500, 540);
 
-		}
-		else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP) 
-		{
-			int btn_jogar = botoesMenuIniciar(evento, 850, 1250, 230, 320);
-			int btn_opcoes = botoesMenuIniciar(evento, 970, 1250, 380, 430);
-			int btn_tutorial = botoesMenuIniciar(evento, 900, 1265, 500, 540);
-			
-			if (btn_jogar) {
-				al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
-				al_flip_display();
-				al_rest(3.0);
+				if (btn_jogar || btn_opcoes || btn_tutorial)
+				{
+					al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
+				}
+				else
+				{
+					al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+				}
+
+			}
+			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
+			{
+				int btn_jogar = botoesMenuIniciar(evento, 850, 1250, 230, 320);
+				int btn_opcoes = botoesMenuIniciar(evento, 970, 1250, 380, 430);
+				int btn_tutorial = botoesMenuIniciar(evento, 900, 1265, 500, 540);
+
+				if (btn_jogar) {
+					al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
+					al_flip_display();
+					al_rest(3.0);
+					al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
+					al_flip_display();
+				}
+				else if (btn_opcoes) {
+					al_draw_bitmap(IMAGEM_TELAOPCOES, 0, 0, 0);
+					al_flip_display();
+					tela = 2;
+				}
+				else if (btn_tutorial) {
+					al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
+					al_flip_display();
+					tela = 3;
+				}
+			}break;
+			case 2:
+				if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
+				{
+					int btn_voltar = botoesMenuIniciar(evento, 30, 90, 90, 140);
+
+					if (btn_voltar)
+					{
+						al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
+					}
+					else
+					{
+						al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+					}
+
+				}
+				else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
+				{
+					int btn_voltar = botoesMenuIniciar(evento, 30, 90, 90, 140);
+
+					if (btn_voltar)
+					{
+						al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
+						al_flip_display();
+						return 0;
+					}
+				}
+				break;
+			case 3:
 				al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
 				al_flip_display();
-			}
-			else if (btn_opcoes) {
-				al_draw_bitmap(IMAGEM_TELAOPCOES, 0, 0, 0);
-				al_flip_display();
-			}
-			else if (btn_tutorial) {
-				al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
-				al_flip_display();
-			}
-		}    
+				break;
+			
+		}
+		
 	}
 
     al_destroy_display(janela);
