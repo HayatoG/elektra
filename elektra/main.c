@@ -9,8 +9,10 @@
 #include <allegro5/allegro_primitives.h>
 #include <stdio.h>
 
+#include "Constantes.h"
 
-#define Tela1 = MenuInicial;
+
+/*#define Tela1 = MenuInicial;
 #define Tela2 = Opcoes;
 #define Tela3 = Tutorial;
 #define Tela4 = Fase1;
@@ -30,7 +32,7 @@ ALLEGRO_EVENT_QUEUE *fila_eventos = NULL;
 ALLEGRO_BITMAP *botao_sair = NULL, *area_jogar = 0;
 ALLEGRO_EVENT evento;
 ALLEGRO_AUDIO_STREAM *musica = NULL;
-ALLEGRO_SAMPLE *somefeitos = NULL;
+ALLEGRO_SAMPLE *somefeitos = NULL;*/
 
 
 int botoesMenuIniciar(ALLEGRO_EVENT e, int x1, int x2, int y1, int y2) {
@@ -156,8 +158,27 @@ int main()
 				if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
 				{
 					int btn_voltar = botoesMenuIniciar(evento, 30, 90, 90, 140);
+					int btn_som_off = botoesMenuIniciar(evento, 520, 610, 260, 340);
+					int btn_som_on = botoesMenuIniciar(evento, 670, 770, 260, 340);
 
 					if (btn_voltar)
+					{
+						al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
+					}
+					else
+					{
+						al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+					}
+					if (btn_som_off)
+					{
+						al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
+					}
+					else
+					{
+						al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+
+					}
+					if (btn_som_on)
 					{
 						al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
 					}
@@ -170,12 +191,24 @@ int main()
 				else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 				{
 					int btn_voltar = botoesMenuIniciar(evento, 30, 90, 90, 140);
+					int btn_som_off = botoesMenuIniciar(evento, 520, 610, 260, 340);
+					int btn_som_on = botoesMenuIniciar(evento, 670, 770, 260, 340);
 
 					if (btn_voltar)
 					{
 						al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
 						al_flip_display();
-						return 0;
+						tela = 1;
+					}
+
+					if (btn_som_off)
+					{
+						al_set_audio_stream_playing(musica, false);
+					}
+
+					if (btn_som_on)
+					{
+						al_set_audio_stream_playing(musica, true);
 					}
 				}
 				break;
