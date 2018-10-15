@@ -20,8 +20,8 @@ Troncos:
 
 Primeira casa:
 
-CIMA - xesq - ; yesq - ; xdir -; ydir - ;
-BAIXO - xesq - ; yesq - ; xdir -; ydir - ;
+CIMA - xesq - 150; yesq - 460; xdir - 175; ydir - 425;
+BAIXO - xesq - 265; yesq - 535; xdir - 290; ydir - 500;
 
 Segunda casa:
 
