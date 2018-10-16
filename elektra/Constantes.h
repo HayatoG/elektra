@@ -1,4 +1,6 @@
 #include<allegro5/allegro.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 //Arquivo para declaração de CONSTANTES do SmartGator
 //Constantes devem ser declaradas com letras maiusculas
 // Atributos da tela
@@ -15,6 +17,7 @@ extern ALLEGRO_BITMAP *IMAGEM_FASE1 = NULL;
 extern ALLEGRO_BITMAP *IMAGEM_FASE2 = NULL;
 extern ALLEGRO_BITMAP *IMAGEM_FASE3 = NULL;
 extern ALLEGRO_BITMAP *IMAGEM_CARD = NULL;
+extern ALLEGRO_BITMAP *IMAGEM_PERSONAGEM = NULL;
 extern ALLEGRO_EVENT_QUEUE *fila_eventos = NULL;
 extern ALLEGRO_BITMAP *botao_sair = NULL, *area_jogar = 0;
 extern ALLEGRO_EVENT evento;
@@ -34,12 +37,12 @@ extern ALLEGRO_FONT *fonte = NULL;
 
 
 //Struct para declaração de posições
-struct Posicoes
+typedef struct
 {
-	double x, y, x0, y0;
+	double x[10], y[10];
 	int jacareAndando;
 
-};
+} Posicoes;
 
 
 

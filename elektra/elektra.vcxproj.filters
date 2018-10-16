@@ -21,9 +21,6 @@
     <ClCompile Include="main.c">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="Funcoes.c">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constantes.h">
