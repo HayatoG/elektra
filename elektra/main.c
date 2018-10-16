@@ -2,8 +2,14 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_native_dialog.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 #include "Constantes.h"
 #include <stdio.h>
+#pragma once
+#define _CRT_SECURE_NO_WARNINGS
+
+
 
 ALLEGRO_EVENT evento;
 ALLEGRO_TIMEOUT timeout;
@@ -11,6 +17,8 @@ ALLEGRO_TIMEOUT timeout;
 int main(void)
 {
 	int sair = 0;
+
+	char dado;
 
     if (!al_init()){
         fprintf(stderr, "Falha ao inicializar a Allegro.\n");
@@ -31,11 +39,31 @@ int main(void)
 	// Configura o título da janela
 	al_set_window_title(janela, "SmartGator");
 
+	al_init_font_addon();
+
+	if (!al_init_ttf_addon()) {
+		error_msg("Falha ao inicializar add-on allegro_ttf");
+		return 0;
+	}
+
 	// Torna apto o uso de mouse na aplicação
 	if (!al_install_mouse()) {
 		error_msg("Falha ao inicializar o mouse");
 		al_destroy_display(janela);
 		return -1;
+	}
+
+	//inicializa addon do teclado
+	if (!al_install_keyboard()) {
+		error_msg("Falha ao inicializar o teclado");
+		return 0;
+	}
+
+	fonte = al_load_font("arial.ttf", 48, 0);
+	if (!fonte) {
+		error_msg("Falha ao carregar \"arial.ttf\"");
+		al_destroy_display(janela);
+		return 0;
 	}
 
 	// Atribui o cursor padrão do sistema para ser usado
@@ -50,9 +78,9 @@ int main(void)
 	IMAGEM_SPLASHSCREEN = al_load_bitmap("Imagens/SplashScreen.png");
 	IMAGEM_MENUINICIAL  = al_load_bitmap("Imagens/MenuInicial.png");
 	IMAGEM_TELAOPCOES   = al_load_bitmap("Imagens/TelaOpcoes.png");
-	IMAGEM_TELA1        = al_load_bitmap("Imagens/Fase_1.png");
-	IMAGEM_TELA2        = al_load_bitmap("Imagens/Fase_1.png");
-	IMAGEM_TELA3        = al_load_bitmap("Imagens/Fase_1.png");
+	IMAGEM_FASE1        = al_load_bitmap("Imagens/Fase_1.png");
+	IMAGEM_FASE2        = al_load_bitmap("Imagens/Fase_2.png");
+	IMAGEM_FASE3        = al_load_bitmap("Imagens/Fase_3.png");
 
 
     // Declarar neste if com o || a cada imagem adicionada, para que caso haja erro, ele pare aqui.
@@ -69,6 +97,7 @@ int main(void)
         return -1;
     }
 
+	al_register_event_source(fila_eventos, al_get_keyboard_event_source());
 	al_register_event_source(fila_eventos, al_get_mouse_event_source());
 	al_register_event_source(fila_eventos, al_get_display_event_source(janela));
 	
@@ -78,7 +107,8 @@ int main(void)
 
     al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
     al_flip_display();
-	int tela = 1;
+	int tela = MENU_PRINCIPAL;
+	int tecla = 0;
 
 	al_register_event_source(fila_eventos, al_get_mouse_event_source());
 
@@ -92,7 +122,7 @@ int main(void)
             break;
         }
 		switch (tela) {
-		case 1:
+		case 1 :
 			if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
 			{
 				int btn_jogar = botoesMenuIniciar(evento, 850, 1250, 230, 320);
@@ -116,22 +146,17 @@ int main(void)
 				int btn_tutorial = botoesMenuIniciar(evento, 900, 1265, 500, 540);
 
 				if (btn_jogar) {
-					al_draw_bitmap(IMAGEM_TELA1, 0, 0, 0);
-					al_flip_display();
-					al_rest(3.0);
-					al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
-					al_flip_display();
-					tela = 1;
+					tela = FASE_CIDADE;
 				}
 				else if (btn_opcoes) {
 					al_draw_bitmap(IMAGEM_TELAOPCOES, 0, 0, 0);
 					al_flip_display();
-					tela = 2;
+					tela = TELA_OPCOES;
 				}
 				else if (btn_tutorial) {
 					al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
 					al_flip_display();
-					tela = 3;
+					tela = TELA_TUTORIAL;
 				}
 			}break;
 			case 2:
@@ -158,14 +183,57 @@ int main(void)
 					{
 						al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
 						al_flip_display();
-						tela = 1;
+						tela = MENU_PRINCIPAL;
 					}
 				}
 				break;
 			case 3:
-				al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
+				al_draw_bitmap(IMAGEM_FASE1, 0, 0, 0);
 				al_flip_display();
 				break;
+			case 4:
+				al_draw_bitmap(IMAGEM_FASE2, 0, 0, 0);
+				al_flip_display();
+		
+				al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+				
+				if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
+					//verifica qual tecla foi pressionada
+					switch (evento.keyboard.keycode) {
+						//seta para cima
+					case ALLEGRO_KEY_SPACE:
+						tecla = 1;
+						break;
+					}
+
+				}
+				else if (evento.type == ALLEGRO_EVENT_KEY_UP) {
+					tecla = 5;
+				}
+					if (tecla){
+
+						switch (tecla) {
+						case 1:
+							//dado = dadosFunction();
+							//Mesma função do dado, mas funcionando aqui
+							srand(time(NULL));
+							int x = 1 + (rand() % 6);
+							char i[10];
+							sprintf_s(i, 10, "%d", x);
+
+							al_draw_textf(fonte, al_map_rgb(0, 0, 0),355, 135, ALLEGRO_ALIGN_CENTRE , i);
+							al_flip_display();
+							al_rest(2);
+							break;
+							
+						}
+						
+						tecla = 0;
+						break;
+					}
+				
+				break;
+
 			
 		}
 		

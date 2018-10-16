@@ -1,1 +1,5 @@
-﻿  elektra.vcxproj -> D:\PI\git\elektra\Debug\elektra.exe
+﻿  main.c
+d:\pi\git\elektra\elektra\main.c(45): warning C4013: 'error_msg' indefinido; assumindo extern retornando int
+d:\pi\git\elektra\elektra\main.c(128): warning C4013: 'botoesMenuIniciar' indefinido; assumindo extern retornando int
+d:\pi\git\elektra\elektra\main.c(21): warning C4101: 'dado': variável local não referenciada
+  elektra.vcxproj -> D:\PI\git\elektra\Debug\elektra.exe
