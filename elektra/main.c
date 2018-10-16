@@ -38,6 +38,11 @@ ALLEGRO_SAMPLE *somefeitos = NULL;*/
 int botoesMenuIniciar(ALLEGRO_EVENT e, int x1, int x2, int y1, int y2) {
 	return e.mouse.x >= x1 && e.mouse.x <= x2 && e.mouse.y >= y1 && e.mouse.y <= y2;
 }
+#include "Constantes.h"
+#include <stdio.h>
+
+ALLEGRO_EVENT evento;
+ALLEGRO_TIMEOUT timeout;
 
 int main()
 {
@@ -68,11 +73,16 @@ int main()
 	al_install_mouse();
 
 	al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+
 	// Declaração de imagens usadas
 	// Se possível seguir o padrão (IMAGEM_NOMEDAIMAGEM)
 	IMAGEM_SPLASHSCREEN = al_load_bitmap("Imagens/SplashScreen.png");
-	IMAGEM_MENUINICIAL = al_load_bitmap("Imagens/MenuInicial.png");
-	IMAGEM_TELAOPCOES = al_load_bitmap("Imagens/TelaOpcoes.png");
+	IMAGEM_MENUINICIAL  = al_load_bitmap("Imagens/MenuInicial.png");
+	IMAGEM_TELAOPCOES   = al_load_bitmap("Imagens/TelaOpcoes.png");
+	IMAGEM_TELA1        = al_load_bitmap("Imagens/Fase_1.png");
+	IMAGEM_TELA2        = al_load_bitmap("Imagens/Fase_1.png");
+	IMAGEM_TELA3        = al_load_bitmap("Imagens/Fase_1.png");
+
 
     // Declarar neste if com o || a cada imagem adicionada, para que caso haja erro, ele pare aqui.
     if (!IMAGEM_SPLASHSCREEN || !IMAGEM_MENUINICIAL || !IMAGEM_TELAOPCOES){
@@ -97,13 +107,13 @@ int main()
 
     al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
     al_flip_display();
+
     	int tela = 1;
+
 
 	al_register_event_source(fila_eventos, al_get_mouse_event_source());
 
     while (!sair){
-        ALLEGRO_EVENT evento;
-        ALLEGRO_TIMEOUT timeout;
         al_init_timeout(&timeout, 0.05);
 
         int tem_eventos = al_wait_for_event_until(fila_eventos, &evento, &timeout);
@@ -138,10 +148,12 @@ int main()
 
 				if (btn_jogar) {
 					al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
+					al_draw_bitmap(IMAGEM_TELA1, 0, 0, 0);
 					al_flip_display();
 					al_rest(3.0);
 					al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
 					al_flip_display();
+					tela = 1;
 				}
 				else if (btn_opcoes) {
 					al_draw_bitmap(IMAGEM_TELAOPCOES, 0, 0, 0);
@@ -160,6 +172,11 @@ int main()
 					int btn_voltar = botoesMenuIniciar(evento, 30, 90, 90, 140);
 					int btn_som_off = botoesMenuIniciar(evento, 520, 610, 260, 340);
 					int btn_som_on = botoesMenuIniciar(evento, 670, 770, 260, 340);
+				//telaOpcoes();
+				if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
+				{
+					int btn_voltar = botoesMenuIniciar(evento, 30, 90, 90, 140);
+
 
 					if (btn_voltar)
 					{
@@ -218,7 +235,6 @@ int main()
 				break;
 			
 		}
-		
 	}
 
     al_destroy_display(janela);
