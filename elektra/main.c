@@ -5,6 +5,9 @@
 #include "Constantes.h"
 #include <stdio.h>
 
+ALLEGRO_EVENT evento;
+ALLEGRO_TIMEOUT timeout;
+
 int main(void)
 {
 	int sair = 0;
@@ -47,6 +50,10 @@ int main(void)
 	IMAGEM_SPLASHSCREEN = al_load_bitmap("Imagens/SplashScreen.png");
 	IMAGEM_MENUINICIAL  = al_load_bitmap("Imagens/MenuInicial.png");
 	IMAGEM_TELAOPCOES   = al_load_bitmap("Imagens/TelaOpcoes.png");
+	IMAGEM_TELA1        = al_load_bitmap("Imagens/Fase_1.png");
+	IMAGEM_TELA2        = al_load_bitmap("Imagens/Fase_1.png");
+	IMAGEM_TELA3        = al_load_bitmap("Imagens/Fase_1.png");
+
 
     // Declarar neste if com o || a cada imagem adicionada, para que caso haja erro, ele pare aqui.
     if (!IMAGEM_SPLASHSCREEN || !IMAGEM_MENUINICIAL || !IMAGEM_TELAOPCOES){
@@ -109,11 +116,12 @@ int main(void)
 				int btn_tutorial = botoesMenuIniciar(evento, 900, 1265, 500, 540);
 
 				if (btn_jogar) {
-					al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
+					al_draw_bitmap(IMAGEM_TELA1, 0, 0, 0);
 					al_flip_display();
 					al_rest(3.0);
 					al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
 					al_flip_display();
+					tela = 1;
 				}
 				else if (btn_opcoes) {
 					al_draw_bitmap(IMAGEM_TELAOPCOES, 0, 0, 0);
@@ -127,6 +135,7 @@ int main(void)
 				}
 			}break;
 			case 2:
+				//telaOpcoes();
 				if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
 				{
 					int btn_voltar = botoesMenuIniciar(evento, 30, 90, 90, 140);
@@ -149,7 +158,7 @@ int main(void)
 					{
 						al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
 						al_flip_display();
-						return;
+						tela = 1;
 					}
 				}
 				break;
@@ -160,7 +169,6 @@ int main(void)
 			
 		}
 		
-
 
 		
 	}
