@@ -180,8 +180,6 @@ int main(void)
 			if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
 				switch (evento.keyboard.keycode) {
 				case ALLEGRO_KEY_SPACE:
-					al_destroy_font(fonteSpace);
-					al_flip_display();
 					tecla = 1;
 					break;
 				}
