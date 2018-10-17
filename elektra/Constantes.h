@@ -1,21 +1,13 @@
 #include<allegro5/allegro.h>
-<<<<<<< HEAD
-//Arquivo para declara√ß√£o de CONSTANTES do SmartGator
-=======
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
-//Arquivo para declaraÁ„o de CONSTANTES do SmartGator
->>>>>>> SMARTGATOR-4
-//Constantes devem ser declaradas com letras maiusculas
-
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 // Atributos da tela
 const int LARGURA_TELA = 1280;
 const int ALTURA_TELA = 720;
-
-//Declara√ß√£o das constantes de fun√ß√µes Allegro
+//Constantes devem ser declaradas com letras maiusculas
 extern ALLEGRO_DISPLAY *janela = NULL;
 extern ALLEGRO_BITMAP *IMAGEM_SPLASHSCREEN = NULL;
 extern ALLEGRO_BITMAP *IMAGEM_MENUINICIAL = NULL;
@@ -29,11 +21,10 @@ extern ALLEGRO_EVENT_QUEUE *fila_eventos = NULL;
 extern ALLEGRO_BITMAP *botao_sair = NULL, *area_jogar = 0;
 extern ALLEGRO_EVENT evento;
 extern ALLEGRO_TIMEOUT timeout;
-<<<<<<< HEAD
 extern ALLEGRO_AUDIO_STREAM *musica = NULL;
 extern ALLEGRO_SAMPLE *somefeitos = NULL;
-=======
 extern ALLEGRO_FONT *fonte = NULL;
+extern ALLEGRO_FONT *fonteSpace = NULL;
 
 // DefiniÁ„o das telas
 #define MENU_PRINCIPAL 1;
@@ -54,12 +45,5 @@ typedef struct
 	int jacareAndando;
 
 } Posicoes;
->>>>>>> SMARTGATOR-4
 
-#define Tela1 = MenuInicial;
-#define Tela2 = Opcoes;
-#define Tela3 = Tutorial;
-#define Tela4 = Fase1;
-#define Tela5 = Fase2;
-#define Tela6 = Fase3;
 

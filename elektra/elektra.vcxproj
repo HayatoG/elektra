@@ -131,7 +131,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Funcoes.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>

@@ -1,1 +1,4 @@
-﻿  elektra.vcxproj -> D:\PI\git\elektra\Debug\elektra.exe
+﻿  main.c
+d:\pi\git\elektra\elektra\main.c(43): warning C4101: 'pressSpace': variável local não referenciada
+d:\pi\git\elektra\elektra\main.c(27): warning C4716: 'error_msg': deve retornar um valor
+  elektra.vcxproj -> D:\PI\git\elektra\Debug\elektra.exe
