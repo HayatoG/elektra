@@ -4,6 +4,7 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_native_dialog.h>
+<<<<<<< HEAD
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_primitives.h>
@@ -38,15 +39,19 @@ ALLEGRO_SAMPLE *somefeitos = NULL;*/
 int botoesMenuIniciar(ALLEGRO_EVENT e, int x1, int x2, int y1, int y2) {
 	return e.mouse.x >= x1 && e.mouse.x <= x2 && e.mouse.y >= y1 && e.mouse.y <= y2;
 }
+=======
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
+>>>>>>> SMARTGATOR-4
 #include "Constantes.h"
 #include <stdio.h>
 
 ALLEGRO_EVENT evento;
 ALLEGRO_TIMEOUT timeout;
 
+<<<<<<< HEAD
 int main()
+=======
 int botoesMenuIniciar(ALLEGRO_EVENT e, int x1, int x2, int y1, int y2) {
 	return e.mouse.x >= x1 && e.mouse.x <= x2 && e.mouse.y >= y1 && e.mouse.y <= y2;
 }
@@ -67,8 +72,12 @@ int error_msg(char *text) {
 	printf("%s", i);
 	return i;
 }*/
+
+int main(void)
+>>>>>>> SMARTGATOR-4
 {
 
+<<<<<<< HEAD
 	int sair = 0;
 
 	al_init();
@@ -96,6 +105,7 @@ int error_msg(char *text) {
 
 	al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
 
+=======
 	char dado;
 
 
@@ -116,33 +126,18 @@ int error_msg(char *text) {
 
 	fonte = al_load_font("arial.ttf", 48, 0);
 	
+>>>>>>> SMARTGATOR-4
 	// Declaração de imagens usadas
 	// Se possível seguir o padrão (IMAGEM_NOMEDAIMAGEM)
 	IMAGEM_SPLASHSCREEN = al_load_bitmap("Imagens/SplashScreen.png");
 	IMAGEM_MENUINICIAL  = al_load_bitmap("Imagens/MenuInicial.png");
 	IMAGEM_TELAOPCOES   = al_load_bitmap("Imagens/TelaOpcoes.png");
-	IMAGEM_TELA1        = al_load_bitmap("Imagens/Fase_1.png");
-	IMAGEM_TELA2        = al_load_bitmap("Imagens/Fase_1.png");
-	IMAGEM_TELA3        = al_load_bitmap("Imagens/Fase_1.png");
-
-
-    // Declarar neste if com o || a cada imagem adicionada, para que caso haja erro, ele pare aqui.
-    if (!IMAGEM_SPLASHSCREEN || !IMAGEM_MENUINICIAL || !IMAGEM_TELAOPCOES){
-        fprintf(stderr, "Falha ao carregar o arquivo de imagem.\n");
-        al_destroy_display(janela);
-        return -1;
-    }
 	IMAGEM_FASE1        = al_load_bitmap("Imagens/Fase_1.png");
 	IMAGEM_FASE2        = al_load_bitmap("Imagens/Fase_2.png");
 	IMAGEM_FASE3        = al_load_bitmap("Imagens/Fase_3.png");
 	IMAGEM_PERSONAGEM   = al_load_bitmap("Imagens/Personagem.png");
 
     fila_eventos = al_create_event_queue();
-    if (!fila_eventos){
-        fprintf(stderr, "Falha ao criar fila de eventos.\n");
-        al_destroy_display(janela);
-        return -1;
-    }
 
 	al_register_event_source(fila_eventos, al_get_keyboard_event_source());
 	al_register_event_source(fila_eventos, al_get_mouse_event_source());
@@ -155,10 +150,13 @@ int error_msg(char *text) {
     al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
     al_flip_display();
 
+<<<<<<< HEAD
     	int tela = 1;
 
+=======
 	int tela = MENU_PRINCIPAL;
 	int tecla = 0;
+>>>>>>> SMARTGATOR-4
 
 	al_register_event_source(fila_eventos, al_get_mouse_event_source());
 
@@ -172,7 +170,6 @@ int error_msg(char *text) {
             break;
         }
 		switch (tela) {
-		case 1:
 		case 1 :
 			if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
 			{
@@ -197,6 +194,7 @@ int error_msg(char *text) {
 				int btn_tutorial = botoesMenuIniciar(evento, 900, 1265, 500, 540);
 
 				if (btn_jogar) {
+<<<<<<< HEAD
 					al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
 					al_draw_bitmap(IMAGEM_TELA1, 0, 0, 0);
 					al_flip_display();
@@ -204,18 +202,18 @@ int error_msg(char *text) {
 					al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
 					al_flip_display();
 					tela = 1;
+=======
 					tela = FASE_CIDADE;
+>>>>>>> SMARTGATOR-4
 				}
 				else if (btn_opcoes) {
 					al_draw_bitmap(IMAGEM_TELAOPCOES, 0, 0, 0);
 					al_flip_display();
-					tela = 2;
 					tela = TELA_OPCOES;
 				}
 				else if (btn_tutorial) {
 					al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
 					al_flip_display();
-					tela = 3;
 					tela = TELA_TUTORIAL;
 				}
 			}break;
@@ -268,7 +266,6 @@ int error_msg(char *text) {
 					{
 						al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
 						al_flip_display();
-						tela = 1;
 						tela = MENU_PRINCIPAL;
 					}
 
@@ -284,7 +281,6 @@ int error_msg(char *text) {
 				}
 				break;
 			case 3:
-				al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
 				al_draw_bitmap(IMAGEM_FASE1, 0, 0, 0);
 				al_flip_display();
 				break;
@@ -325,7 +321,6 @@ int error_msg(char *text) {
 						break;
 					}
 				break;
-			
 		}
 	}
 

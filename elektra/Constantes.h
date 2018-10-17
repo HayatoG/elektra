@@ -1,8 +1,11 @@
 #include<allegro5/allegro.h>
+<<<<<<< HEAD
 //Arquivo para declaraÃ§Ã£o de CONSTANTES do SmartGator
+=======
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
-//Arquivo para declaraï¿½ï¿½o de CONSTANTES do SmartGator
+//Arquivo para declaração de CONSTANTES do SmartGator
+>>>>>>> SMARTGATOR-4
 //Constantes devem ser declaradas com letras maiusculas
 
 #include <allegro5/allegro.h>
@@ -17,9 +20,6 @@ extern ALLEGRO_DISPLAY *janela = NULL;
 extern ALLEGRO_BITMAP *IMAGEM_SPLASHSCREEN = NULL;
 extern ALLEGRO_BITMAP *IMAGEM_MENUINICIAL = NULL;
 extern ALLEGRO_BITMAP *IMAGEM_TELAOPCOES = NULL;
-extern ALLEGRO_BITMAP *IMAGEM_TELA1 = NULL;
-extern ALLEGRO_BITMAP *IMAGEM_TELA2 = NULL;
-extern ALLEGRO_BITMAP *IMAGEM_TELA3 = NULL;
 extern ALLEGRO_BITMAP *IMAGEM_FASE1 = NULL;
 extern ALLEGRO_BITMAP *IMAGEM_FASE2 = NULL;
 extern ALLEGRO_BITMAP *IMAGEM_FASE3 = NULL;
@@ -29,25 +29,32 @@ extern ALLEGRO_EVENT_QUEUE *fila_eventos = NULL;
 extern ALLEGRO_BITMAP *botao_sair = NULL, *area_jogar = 0;
 extern ALLEGRO_EVENT evento;
 extern ALLEGRO_TIMEOUT timeout;
+<<<<<<< HEAD
 extern ALLEGRO_AUDIO_STREAM *musica = NULL;
 extern ALLEGRO_SAMPLE *somefeitos = NULL;
+=======
 extern ALLEGRO_FONT *fonte = NULL;
-// Definiï¿½ï¿½o das telas
+
+// Definição das telas
 #define MENU_PRINCIPAL 1;
 #define TELA_OPCOES 2;
 #define FASE_PANTANO 3;
 #define FASE_CIDADE 4;
 #define FASE_REINO 5;
 #define TELA_TUTORIAL 6;
+
 // CARDS
 
-//Struct para declaraï¿½ï¿½o de posiï¿½ï¿½es
+
+
+//Struct para declaração de posições
 typedef struct
 {
 	double x[10], y[10];
 	int jacareAndando;
 
 } Posicoes;
+>>>>>>> SMARTGATOR-4
 
 #define Tela1 = MenuInicial;
 #define Tela2 = Opcoes;
