@@ -164,7 +164,29 @@ int main(void)
 
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
-			break;
+			{
+					int btn_voltar = botoesMenuIniciar(evento, 30, 90, 90, 140);
+					int btn_som_off = botoesMenuIniciar(evento, 520, 610, 260, 340);
+					int btn_som_on = botoesMenuIniciar(evento, 670, 770, 260, 340);
+
+					if (btn_voltar)
+					{
+						al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
+						al_flip_display();
+						tela = 1;
+					}
+
+					if (btn_som_off)
+					{
+						al_set_audio_stream_playing(musica, false);
+					}
+
+					if (btn_som_on)
+					{
+						al_set_audio_stream_playing(musica, true);
+					}
+				}
+				break;			
 		case 3:
 			al_draw_bitmap(IMAGEM_FASE1, 0, 0, 0);
 			al_flip_display();
