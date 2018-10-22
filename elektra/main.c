@@ -49,7 +49,9 @@ int main(void)
 	al_init_font_addon();
 	al_init_ttf_addon();
 	al_install_keyboard();
-	musica = al_load_audio_stream("Sons/MarioTesteSound.wav", 4, 1024);
+	theme = al_load_audio_stream("Sons/Theme.wav", 8, 2048);
+	starting = al_load_audio_stream("Sons/Starting.wav", 8, 2048);
+
 	al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
 
 	// Configura o título da janela
@@ -75,17 +77,23 @@ int main(void)
 	al_register_event_source(fila_eventos, al_get_display_event_source(janela));
 
 	al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
+	al_attach_audio_stream_to_mixer(starting, al_get_default_mixer());
+	al_set_audio_stream_playmode(starting, ALLEGRO_PLAYMODE_ONCE);
+	al_set_audio_stream_playing(starting, true);
 	al_flip_display();
-	al_rest(3.0);
+	//al_destroy_audio_stream(starting);
+	al_rest(4.0);
 
 	al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
+	al_attach_audio_stream_to_mixer(theme, al_get_default_mixer());
+	al_set_audio_stream_playmode(theme, ALLEGRO_PLAYMODE_LOOP);
+	al_set_audio_stream_playing(theme, true);
 	al_flip_display();
 
-	al_attach_audio_stream_to_mixer(musica, al_get_default_mixer());
-	al_set_audio_stream_playing(musica, false);
+
 	//Para ativar a música, comentar linha de cima e descomentar a de baixo, apenas enquanto o PI esta sendo feito
 	//pra nao enxer o saco sz
-	//al_set_audio_stream_playing(musica, true);
+	//al_set_audio_stream_playing(theme, true);
 	int tela = MENU_PRINCIPAL;
 	int tecla = 0;
 
@@ -172,18 +180,19 @@ int main(void)
 
 					if (btn_som_off)
 					{
-						al_set_audio_stream_playing(musica, false);
+						al_set_audio_stream_playing(theme, false);
 					}
 
 					if (btn_som_on)
 					{
-						al_set_audio_stream_playing(musica, true);
+						al_set_audio_stream_playing(theme, true);
 					}
 				}
 				break;			
 		case 3:
 			al_draw_bitmap(IMAGEM_FASE1, 0, 0, 0);
 			al_draw_bitmap(IMAGEM_PERSONAGEM, 0, 415, 0);
+			//al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 1125, 730, ALLEGRO_ALIGN_CENTRE, "Casas a andar");
 			al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 555, 635, ALLEGRO_ALIGN_CENTRE, "Pressione espaço para sortear um número.");
 			al_flip_display();
 
@@ -242,6 +251,7 @@ int main(void)
 						int x = 1 + (rand() % 6);
 						char i[10];
 						//sprintf_s(i, 10, "%d", x);
+						//snprintf é equivalente a sprintf_s no Linux;
 						snprintf(i, 10, "%d", x);
 
 						al_draw_textf(fonte, al_map_rgb(0, 0, 0), 355, 135, ALLEGRO_ALIGN_CENTRE, i);
