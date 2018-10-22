@@ -20,12 +20,6 @@ int botoesMenuIniciar(ALLEGRO_EVENT e, int x1, int x2, int y1, int y2) {
 	return e.mouse.x >= x1 && e.mouse.x <= x2 && e.mouse.y >= y1 && e.mouse.y <= y2;
 }
 
-int error_msg(char *text) {
-	al_show_native_message_box(NULL, "ERRO",
-		"Ocorreu o seguinte erro e o programa sera finalizado:",
-		text, NULL, ALLEGRO_MESSAGEBOX_ERROR);
-}
-
 
 //Deveria estar funcionando, mas não funciona, coloquei no main, para descobrirmos depois
 /*int dadosFunction() {
@@ -131,8 +125,8 @@ int main(void)
 				int btn_tutorial = botoesMenuIniciar(evento, 900, 1265, 500, 540);
 
 				if (btn_jogar) {
-					//tela = FASE_PANTANO;
-					tela = FASE_CIDADE;
+					tela = FASE_PANTANO;
+					//tela = FASE_CIDADE;
 				}
 				else if (btn_opcoes) {
 					al_draw_bitmap(IMAGEM_TELAOPCOES, 0, 0, 0);
@@ -189,12 +183,44 @@ int main(void)
 				break;			
 		case 3:
 			al_draw_bitmap(IMAGEM_FASE1, 0, 0, 0);
+			al_draw_bitmap(IMAGEM_PERSONAGEM, 0, 415, 0);
+			al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 555, 635, ALLEGRO_ALIGN_CENTRE, "Pressione espaço para sortear um número.");
 			al_flip_display();
+
+			al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+			
+			if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
+				switch (evento.keyboard.keycode) {
+					case ALLEGRO_KEY_SPACE:
+						tecla = 1;
+						break;
+				}
+			}
+			if (tecla) {
+
+				switch (tecla) {
+					case 1:
+						srand(time(NULL));
+						int x = 1 + (rand() % 6);
+						char i[10];
+						//sprintf_s(i, 10, "%d", x);
+						snprintf(i, 10, "%d", x);
+
+						al_draw_textf(fonte, al_map_rgb(0, 0, 0), 1125, 480, ALLEGRO_ALIGN_CENTRE, i);
+						al_flip_display();
+						al_rest(2);
+						
+						break;
+				}
+				tecla = 0;
+				break;
+			}
+
 			break;
 		case 4:
 			al_draw_bitmap(IMAGEM_FASE2, 0, 0, 0);
 			al_draw_bitmap(IMAGEM_PERSONAGEM, 20, 207, 0);
-			al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 555, 635, ALLEGRO_ALIGN_CENTRE, "Pressione enter para rolar os dados");
+			al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 555, 635, ALLEGRO_ALIGN_CENTRE, "Pressione espaço para sortear um número.");
 			al_flip_display();
 
 			al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
@@ -215,7 +241,8 @@ int main(void)
 						srand(time(NULL));
 						int x = 1 + (rand() % 6);
 						char i[10];
-						sprintf_s(i, 10, "%d", x);
+						//sprintf_s(i, 10, "%d", x);
+						snprintf(i, 10, "%d", x);
 
 						al_draw_textf(fonte, al_map_rgb(0, 0, 0), 355, 135, ALLEGRO_ALIGN_CENTRE, i);
 						al_flip_display();
