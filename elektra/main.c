@@ -81,8 +81,9 @@ int main(void)
 	al_set_audio_stream_playmode(starting, ALLEGRO_PLAYMODE_ONCE);
 	al_set_audio_stream_playing(starting, true);
 	al_flip_display();
-	//al_destroy_audio_stream(starting);
 	al_rest(4.0);
+	al_destroy_audio_stream(starting);
+
 
 	al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
 	al_attach_audio_stream_to_mixer(theme, al_get_default_mixer());
