@@ -140,7 +140,6 @@ int main(void)
 
 				if (btn_jogar) {
 					tela = FASE_PANTANO;
-					//tela = FASE_CIDADE;
 				}
 				else if (btn_opcoes) {
 					al_draw_bitmap(IMAGEM_TELAOPCOES, 0, 0, 0);
@@ -207,45 +206,6 @@ int main(void)
 			if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
 				switch (evento.keyboard.keycode) {
 				break;
-			case 3:
-				al_draw_bitmap(IMAGEM_FASE1, 0, 0, 0);
-				al_flip_display();
-				break;
-			case 4:
-				al_draw_bitmap(IMAGEM_FASE2, 0, 0, 0);
-				al_draw_bitmap(IMAGEM_PERSONAGEM, arrX[casa], arrY[casa], 0);
-				al_flip_display();
-		
-				al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
-				
-				if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
-					switch (evento.keyboard.keycode) {
-					case ALLEGRO_KEY_SPACE:
-						tecla = 1;
-						break;
-				}
-			}
-			if (tecla) {
-
-				switch (tecla) {
-					case 1:
-						srand(time(NULL));
-						int x = 1 + (rand() % 6);
-						char i[10];
-						//sprintf_s(i, 10, "%d", x);
-						snprintf(i, 10, "%d", x);
-
-						al_draw_textf(fonte, al_map_rgb(0, 0, 0), 1125, 480, ALLEGRO_ALIGN_CENTRE, i);
-						al_flip_display();
-						al_rest(2);
-						
-						break;
-				}
-				tecla = 0;
-				break;
-			}
-
-			break;
 		case 4:
 			al_draw_bitmap(IMAGEM_FASE2, 0, 0, 0);
 			al_draw_bitmap(IMAGEM_PERSONAGEM, 20, 207, 0);
@@ -277,29 +237,10 @@ int main(void)
 						al_draw_textf(fonte, al_map_rgb(0, 0, 0), 355, 135, ALLEGRO_ALIGN_CENTRE, i);
 						al_flip_display();
 						al_rest(2);
-						
-					if (tecla){
-
-						switch (tecla) {
-						case 1:
-							//dado = dadosFunction();
-							//Mesma função do dado, mas funcionando aqui
-							srand(time(NULL));
-							int x = 1 + (rand() % 6);
-							char i[10];
-							sprintf_s(i, 10, "%d", x);
-
-							al_draw_textf(fonte, al_map_rgb(0, 0, 0),355, 135, ALLEGRO_ALIGN_CENTRE , i);
-							al_flip_display();
-							al_rest(2);
-							casa = x;
-							al_draw_bitmap(IMAGEM_PERSONAGEM, arrX[x], arrY[x], 0);
-							al_flip_display();
+						casa = x;
+						al_draw_bitmap(IMAGEM_PERSONAGEM, arrX[x], arrY[x], 0);
+						al_flip_display();
 					
-							break;
-							
-						}
-						tecla = 0;
 						break;
 				}
 				tecla = 0;
