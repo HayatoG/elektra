@@ -36,6 +36,11 @@ int main(void)
 	int sair = 0;
 	char pressSpace[100];
 
+	int casa = 0;
+	int arrX[] = { 20,  200, 380, 500, 650, 790, 955 };
+	int arrY[] = { 207, 207, 207, 135, 70, 70, 70};
+
+
 	//Inicialização de libs do Allegro
 	al_init();
 	al_init_image_addon();
@@ -201,6 +206,20 @@ int main(void)
 			
 			if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
 				switch (evento.keyboard.keycode) {
+				break;
+			case 3:
+				al_draw_bitmap(IMAGEM_FASE1, 0, 0, 0);
+				al_flip_display();
+				break;
+			case 4:
+				al_draw_bitmap(IMAGEM_FASE2, 0, 0, 0);
+				al_draw_bitmap(IMAGEM_PERSONAGEM, arrX[casa], arrY[casa], 0);
+				al_flip_display();
+		
+				al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+				
+				if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
+					switch (evento.keyboard.keycode) {
 					case ALLEGRO_KEY_SPACE:
 						tecla = 1;
 						break;
@@ -259,6 +278,28 @@ int main(void)
 						al_flip_display();
 						al_rest(2);
 						
+					if (tecla){
+
+						switch (tecla) {
+						case 1:
+							//dado = dadosFunction();
+							//Mesma função do dado, mas funcionando aqui
+							srand(time(NULL));
+							int x = 1 + (rand() % 6);
+							char i[10];
+							sprintf_s(i, 10, "%d", x);
+
+							al_draw_textf(fonte, al_map_rgb(0, 0, 0),355, 135, ALLEGRO_ALIGN_CENTRE , i);
+							al_flip_display();
+							al_rest(2);
+							casa = x;
+							al_draw_bitmap(IMAGEM_PERSONAGEM, arrX[x], arrY[x], 0);
+							al_flip_display();
+					
+							break;
+							
+						}
+						tecla = 0;
 						break;
 				}
 				tecla = 0;
