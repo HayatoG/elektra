@@ -35,7 +35,9 @@ int main(void)
 {
 	int sair = 0;
 
-	char dado;
+	int casa = 0;
+	int arrX[] = { 20,  200, 380, 500, 650, 790, 955 };
+	int arrY[] = { 207, 207, 207, 135, 70, 70, 70};
 
 
 	//Inicialização de libs do Allegro
@@ -164,7 +166,7 @@ int main(void)
 				break;
 			case 4:
 				al_draw_bitmap(IMAGEM_FASE2, 0, 0, 0);
-				al_draw_bitmap(IMAGEM_PERSONAGEM, 20, 207, 0);
+				al_draw_bitmap(IMAGEM_PERSONAGEM, arrX[casa], arrY[casa], 0);
 				al_flip_display();
 		
 				al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
@@ -191,6 +193,9 @@ int main(void)
 							al_draw_textf(fonte, al_map_rgb(0, 0, 0),355, 135, ALLEGRO_ALIGN_CENTRE , i);
 							al_flip_display();
 							al_rest(2);
+							casa = x;
+							al_draw_bitmap(IMAGEM_PERSONAGEM, arrX[x], arrY[x], 0);
+							al_flip_display();
 					
 							break;
 							
