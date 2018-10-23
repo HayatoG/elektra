@@ -37,8 +37,10 @@ int main(void)
 	char pressSpace[100];
 
 	int casa = 0;
-	int arrX[] = { 20,  200, 380, 500, 650, 790, 955 };
-	int arrY[] = { 207, 207, 207, 135, 70, 70, 70};
+	int pantanoX[] = {0};
+	int pantanoY[] = {415};
+	int cidadeX[] = { 20,  200, 380, 500, 650, 790, 955 };
+	int cidadeY[] = { 207, 207, 207, 135, 70, 70, 70 };
 
 
 	//Inicialização de libs do Allegro
@@ -68,12 +70,12 @@ int main(void)
 	// Declaração de imagens usadas
 	// Se possível seguir o padrão (IMAGEM_NOMEDAIMAGEM)
 	IMAGEM_SPLASHSCREEN = al_load_bitmap("Imagens/SplashScreen.png");
-	IMAGEM_MENUINICIAL  = al_load_bitmap("Imagens/MenuInicial.png");
-	IMAGEM_TELAOPCOES   = al_load_bitmap("Imagens/TelaOpcoes.png");
-	IMAGEM_FASE1        = al_load_bitmap("Imagens/Fase_1.png");
-	IMAGEM_FASE2        = al_load_bitmap("Imagens/Fase_2.png");
-	IMAGEM_FASE3        = al_load_bitmap("Imagens/Fase_3.png");
-	IMAGEM_PERSONAGEM   = al_load_bitmap("Imagens/Personagem.png");
+	IMAGEM_MENUINICIAL = al_load_bitmap("Imagens/MenuInicial.png");
+	IMAGEM_TELAOPCOES = al_load_bitmap("Imagens/TelaOpcoes.png");
+	IMAGEM_FASE1 = al_load_bitmap("Imagens/Fase_1.png");
+	IMAGEM_FASE2 = al_load_bitmap("Imagens/Fase_2.png");
+	IMAGEM_FASE3 = al_load_bitmap("Imagens/Fase_3.png");
+	IMAGEM_PERSONAGEM = al_load_bitmap("Imagens/Personagem.png");
 
 	fila_eventos = al_create_event_queue();
 
@@ -160,55 +162,44 @@ int main(void)
 				int btn_som_off = botoesMenuIniciar(evento, 520, 610, 260, 340);
 				int btn_som_on = botoesMenuIniciar(evento, 670, 770, 260, 340);
 
-					if (btn_voltar || btn_som_off || btn_som_on)
-					{
-						al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
-					}
-					else
-					{
-						al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
-					}
+				if (btn_voltar || btn_som_off || btn_som_on)
+				{
+					al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
+				}
+				else
+				{
+					al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+				}
 
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 			{
-					int btn_voltar = botoesMenuIniciar(evento, 30, 90, 90, 140);
-					int btn_som_off = botoesMenuIniciar(evento, 520, 610, 260, 340);
-					int btn_som_on = botoesMenuIniciar(evento, 670, 770, 260, 340);
+				int btn_voltar = botoesMenuIniciar(evento, 30, 90, 90, 140);
+				int btn_som_off = botoesMenuIniciar(evento, 520, 610, 260, 340);
+				int btn_som_on = botoesMenuIniciar(evento, 670, 770, 260, 340);
 
-					if (btn_voltar)
-					{
-						al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
-						al_flip_display();
-						tela = 1;
-					}
-
-					if (btn_som_off)
-					{
-						al_set_audio_stream_playing(theme, false);
-					}
-
-					if (btn_som_on)
-					{
-						al_set_audio_stream_playing(theme, true);
-					}
+				if (btn_voltar)
+				{
+					al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
+					al_flip_display();
+					tela = 1;
 				}
-				break;			
+
+				if (btn_som_off)
+				{
+					al_set_audio_stream_playing(theme, false);
+				}
+
+				if (btn_som_on)
+				{
+					al_set_audio_stream_playing(theme, true);
+				}
+			}
+			break;
 		case 3:
 			al_draw_bitmap(IMAGEM_FASE1, 0, 0, 0);
-			al_draw_bitmap(IMAGEM_PERSONAGEM, 0, 415, 0);
+			al_draw_bitmap(IMAGEM_PERSONAGEM, pantanoX[casa], pantanoY[casa], 0);
 			//al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 1125, 730, ALLEGRO_ALIGN_CENTRE, "Casas a andar");
-			al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 555, 635, ALLEGRO_ALIGN_CENTRE, "Pressione espaço para sortear um número.");
-			al_flip_display();
-
-			al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
-			
-			if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
-				switch (evento.keyboard.keycode) {
-				break;
-		case 4:
-			al_draw_bitmap(IMAGEM_FASE2, 0, 0, 0);
-			al_draw_bitmap(IMAGEM_PERSONAGEM, 20, 207, 0);
 			al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 555, 635, ALLEGRO_ALIGN_CENTRE, "Pressione espaço para sortear um número.");
 			al_flip_display();
 
@@ -224,34 +215,70 @@ int main(void)
 			if (tecla) {
 
 				switch (tecla) {
-					case 1:
-						//dado = dadosFunction();
-						//Mesma função do dado, mas funcionando aqui
-						srand(time(NULL));
-						int x = 1 + (rand() % 6);
-						char i[10];
-						//sprintf_s(i, 10, "%d", x);
-						//snprintf é equivalente a sprintf_s no Linux;
-						snprintf(i, 10, "%d", x);
+				case 1:
+					srand(time(NULL));
+					int x = 1 + (rand() % 6);
+					char i[10];
+					//sprintf_s(i, 10, "%d", x);
+					snprintf(i, 10, "%d", x);
 
-						al_draw_textf(fonte, al_map_rgb(0, 0, 0), 355, 135, ALLEGRO_ALIGN_CENTRE, i);
-						al_flip_display();
-						al_rest(2);
-						casa = x;
-						al_draw_bitmap(IMAGEM_PERSONAGEM, arrX[x], arrY[x], 0);
-						al_flip_display();
-					
-						break;
+					al_draw_textf(fonte, al_map_rgb(0, 0, 0), 1125, 480, ALLEGRO_ALIGN_CENTRE, i);
+					al_flip_display();
+					al_rest(2);
+
+					break;
+				}
+				tecla = 0;
+				break;
+			}
+			break;
+		case 4:
+			al_draw_bitmap(IMAGEM_FASE2, 0, 0, 0);
+			al_draw_bitmap(IMAGEM_PERSONAGEM, cidadeX[casa], cidadeY[casa], 0);
+			al_flip_display();
+
+			al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+
+			if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
+				switch (evento.keyboard.keycode) {
+				case ALLEGRO_KEY_SPACE:
+					tecla = 1;
+					break;
+				}
+
+			}
+			if (tecla) {
+
+				switch (tecla) {
+				case 1:
+					//dado = dadosFunction();
+					//Mesma função do dado, mas funcionando aqui
+					srand(time(NULL));
+					int x = 1 + (rand() % 6);
+					char i[10];
+					sprintf_s(i, 10, "%d", x);
+
+					al_draw_textf(fonte, al_map_rgb(0, 0, 0), 355, 135, ALLEGRO_ALIGN_CENTRE, i);
+					al_flip_display();
+					al_rest(2);
+					casa = x;
+					al_draw_bitmap(IMAGEM_PERSONAGEM, cidadeX[x], cidadeY[x], 0);
+					al_flip_display();
+
+					break;
+
 				}
 				tecla = 0;
 				break;
 			}
 			break;
 		}
+
+
 	}
 
-		al_destroy_display(janela);
-		al_destroy_event_queue(fila_eventos);
+	al_destroy_display(janela);
+	al_destroy_event_queue(fila_eventos);
 
-		return 0;
+	return 0;
 }
