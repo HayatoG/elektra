@@ -11,6 +11,7 @@
 #include <allegro5/allegro_ttf.h>
 #include "Constantes.h"
 #include <stdio.h>
+#include <string.h>
 
 
 ALLEGRO_EVENT evento;
@@ -20,19 +21,33 @@ int botoesFunction(ALLEGRO_EVENT e, int x1, int x2, int y1, int y2) {
 	return e.mouse.x >= x1 && e.mouse.x <= x2 && e.mouse.y >= y1 && e.mouse.y <= y2;
 }
 
-int cardFunction(ALLEGRO_BITMAP *card, int x, int y, ALLEGRO_FONT *fonte) {
+int cardFunction(ALLEGRO_BITMAP *cartao, int x, int y, ALLEGRO_FONT *fonte, struct structCards *c) {
 
-	char cards_Questions[100] = {"What this expression “Strike while the iron is hot.” means?"};
-
-	al_draw_bitmap(card, x, y, 0);
-	al_draw_textf(fonte, al_map_rgb(0, 0, 0), 525, 60, ALLEGRO_ALIGN_CENTRE, cards_Questions);
+	char cards_Questions[] = {"What this expression “Strike while the iron is hot.” means?"};
+	ALLEGRO_COLOR preto = al_map_rgb(0,0,0);
+	//printf("%17",  c->perguntas);
+	al_draw_bitmap(cartao, x, y, 0);
+	//al_draw_multiline_text(fonte, preto, 555, 70, 300, 100, 0, c[0].perguntas);
+	al_draw_multiline_text(fonte, preto, 555, 70, 300, 100, 0, cards_Questions);
 	al_flip_display();
 	al_rest(10);
 }
 
+ typedef struct structCards {
+	char perguntas[150];
+	char resposta1[150];
+	char resposta2[150];
+	char resposta3[150];
+}structCards;
+
+
 
 int main(void)
 {
+	structCards carta[] = {
+		{"Pergunta", "Resposta1", "Resposta2", "Resposta3"},
+		{"Pergunta1", "Resposta11", "Resposta21", "Resposta31"}
+	};
 	int sair = 0;
 	int casa = 0;
 	int tela = MENU_PRINCIPAL;
@@ -224,7 +239,7 @@ int main(void)
 					}
 					al_draw_bitmap(IMAGEM_PERSONAGEM, pantanoX[casa], pantanoY[casa], 0);
 					al_flip_display();
-					cardFunction(IMAGEM_CARD, 355, 0, fonteSpace);
+					cardFunction(IMAGEM_CARD, 355, 0, fonteSpace, &carta[0]);
 					break;
 				}
 				tecla = 0;
