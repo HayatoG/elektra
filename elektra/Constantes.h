@@ -28,6 +28,7 @@ ALLEGRO_AUDIO_STREAM *starting = NULL;
 ALLEGRO_SAMPLE *somefeitos = NULL;
 ALLEGRO_FONT *fonte = NULL;
 ALLEGRO_FONT *fonteSpace = NULL;
+ALLEGRO_FONT *fonteCard = NULL;
 
 
 
