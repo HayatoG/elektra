@@ -16,26 +16,75 @@
 
 ALLEGRO_EVENT evento;
 ALLEGRO_TIMEOUT timeout;
+int x_inicial_resposta = X_INICIAL_RESPOSTA;
+int x_final_resposta = X_FINAL_RESPOSTA;
+int y_inicial_a = Y_INICIAL_A;
+int y_final_a = Y_FINAL_A;
+int y_inicial_b = Y_INICIAL_B;
+int y_final_b = Y_FINAL_B;
+int y_inicial_c = Y_INICIAL_C;
+int y_final_c = Y_FINAL_C;
 
 int botoesFunction(ALLEGRO_EVENT e, int x1, int x2, int y1, int y2) {
 	return e.mouse.x >= x1 && e.mouse.x <= x2 && e.mouse.y >= y1 && e.mouse.y <= y2;
 }
 
-int cardFunction(ALLEGRO_BITMAP *cartao, int x, int y, struct structCards *pergunta, struct structCards *resposta1, struct structCards *resposta2, struct structCards *resposta3) {
+int cardFunction(ALLEGRO_EVENT evento, ALLEGRO_BITMAP *cartao, int x, int y, struct structCards *pergunta, struct structCards *resposta1, 
+	struct structCards *resposta2, struct structCards *resposta3, struct structCards *x1, struct structCards *x2, struct structCards *y1, struct structCards *y2) {
 
-	ALLEGRO_COLOR preto = al_map_rgb(0,0,0);
-	ALLEGRO_COLOR branco = al_map_rgb(0, 0, 255);
+	int cardOpen = 1;
 
+	ALLEGRO_COLOR preto = al_map_rgb(0, 0, 0);
+	ALLEGRO_COLOR verde = al_map_rgb(4, 94, 23);
 	fonteCard = al_load_font("fontePedra.ttf", 24, 0);
 
 	al_draw_bitmap(cartao, x, y, 0);
-	//al_draw_multiline_text(fonte, preto, 555, 70, 300, 100, 0, c[0].perguntas);
-	al_draw_multiline_text(fonteCard, branco, 555, 120, 230, 50, 0, pergunta);
+
+	al_draw_multiline_text(fonteCard, verde, 555, 120, 230, 50, 0, pergunta);
 	al_draw_multiline_text(fonteCard, preto, 540, 380, 230, 40, 0, resposta1);
 	al_draw_multiline_text(fonteCard, preto, 540, 480, 230, 40, 0, resposta2);
 	al_draw_multiline_text(fonteCard, preto, 540, 580, 230, 40, 0, resposta3);
 	al_flip_display();
-	al_rest(5);
+	do {
+		al_init_timeout(&timeout, 0.05);
+
+		int tem_eventos = al_wait_for_event_until(fila_eventos, &evento, &timeout);
+
+		if (tem_eventos) {
+			if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
+			{
+				int resposta1 = botoesFunction(evento, x_inicial_resposta, x_final_resposta, y_inicial_a, y_final_a);
+				int resposta2 = botoesFunction(evento, x_inicial_resposta, x_final_resposta, y_inicial_b, y_final_b);
+				int resposta3 = botoesFunction(evento, x_inicial_resposta, x_final_resposta, y_inicial_c, y_final_c);
+				printf("%3d %3d %3d\n", resposta1, resposta2, resposta3);
+				if (resposta1 || resposta2 || resposta3)
+				{
+					al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
+				}
+				else
+				{
+					al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+				}
+
+			}
+			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
+			{
+				int resposta_certa = botoesFunction(evento, x1, x2, y1, y2);
+
+				if (resposta_certa) {
+					printf("Resposta certa");
+					cardOpen = 0;
+				}
+				else {
+					printf("Resposta errada");
+					cardOpen = 0;
+				}
+				
+			}
+		}
+	} while (cardOpen = 1);
+
+	
 }
 
  typedef struct structCards {
@@ -43,41 +92,45 @@ int cardFunction(ALLEGRO_BITMAP *cartao, int x, int y, struct structCards *pergu
 	char resposta1[150];
 	char resposta2[150];
 	char resposta3[150];
-	int x_certo;
-	int y_certo;
+	int x1_certo;
+	int x2_certo;
+	int y1_certo;
+	int y2_certo;
 }structCards;
-
 
 
 int main(void)
 {
+
 	structCards carta[] = {
-		{"What this expression “Strike while the iron is hot.” means?", "a) “Sua batata tá esquentando”", "b) “A coisa tá feia”", "c) “Aproveite enquanto é tempo”"},
-		{"What this expression “That’s hardly the issue.” means?", "a) “Essa é uma questão difícil”", "b) “Isso não vem ao caso”", "c) “Isso é mais difícil do que eu pensei”"},
-		{"What this expression “I got out of bed on the wrong side.” means?", "a) “Levantei com o pé esquerdo”","b) “Cai da cama nessa manhã”","c) “Sai da cama pelo lado errado”"},
-		{"What this expression “A bird in the hand is worth two in the bush.” means?", "a) “Deixa ir”", "b) “Um pássaro é tão bonito quanto dois.”", "c) “Mais vale um pássaro na mão do que dois voando.”"},
-		{"Complete the phrase “___ we ___ enough time to savage this love” ","a) Do/had","b) Does/has","c) Do/have"},
-		{"Complete the phrase “___ I go to the ______” ","a) May/bathroom","b) May/restroom","c) Do/restroom"},
-		{"Complete the phrase “ __ ___ a student?” ","a) Do/you","b) Are/you","c) Does/you"},
-		{"Translate this phrase “What do you want to do tomorrow?”","a) O que você vai fazer amanhã?","b) Você quer fazer algo amanhã?","c) O que você quer fazer amanhã?"},
-		{"Translate this phrase “I wanna live like a star?” ","a) Eu quero ser uma estrela","b) Eu quero viver como uma estrela","c) Eu sou uma estrela"},
-		{"Translate this phrase “I intend to do something” ","a) Eu entendo para fazer algo","b) Eu pretendo fazer algo","c) Eu entendi que preciso fazer algo"},
-		{"Translate this phrase “Actually, I don’t know what to do” ","a) Na verdade, eu não sei o que fazer","b) Atualmente, eu não sei o que fazer","c) Atualmente, eu não quero fazer nada"},
-		{"Translate this phrase “Is it time to lunch?” ","a) É a hora do lanche?","b) É a hora de comer?","c) É a hora do almoço?"},
-		{"Pass this phrase “You need this book” to interrogative form. ","a) Does you need this book?","b) Do you need this book?","c) Are you need this book?"},
-		{"Pass this phrase “You went to the mall without me” to interrogative form. ","a) Did you go to the mall without me?","b) Do you went to the mall without me?","c) Went you to the mall without me?"},
-		{"Pass this phrase “I want to eat protein” to negative form. ","a) I didn’t eat protein","b) I don’t want to eat protein","c) I don’t eat protein"},
-		{"Pass this phrase “You are in the wrong way” to negative form.","a) You aren’t in the wrong way","b) You don’t are in the wrong way","c) You aren’t in the right way"},
-		{"Pass this phrase “They aren’t cool with us” to affirmative form. ","a) They are cool with us","b) They do are cool with us","c) They don’t are cool with us"},
-		{"Pass this phrase “Did he say that we need to go?” to affirmative form.","a) He said that we need to go","b) He said that we need to went","c) He say that we need to went"},
-		{"What is the right way to answer: “How old are you?”","a) I have 15 years old","b) I am 15 years old","c) I do 15 years"},
-		{"What is the right way to answer: “What’s your name?”","- a) My name is fulano","b) My name are fulano","c) My name do fulano"}
+		{"What this expression “Strike while the iron is hot.” means?", "a) “Sua batata tá esquentando”", "b) “A coisa tá feia”", "c) “Aproveite enquanto é tempo”", x_inicial_resposta, x_final_resposta, y_inicial_c, y_final_c},
+		{"What this expression “That’s hardly the issue.” means?", "a) “Essa é uma questão difícil”", "b) “Isso não vem ao caso”", "c) “Isso é mais difícil do que eu pensei”", x_inicial_resposta, x_final_resposta, y_inicial_b, y_final_b},
+		{"What this expression “I got out of bed on the wrong side.” means?", "a) “Levantei com o pé esquerdo”","b) “Cai da cama nessa manhã”","c) “Sai da cama pelo lado errado”", x_inicial_resposta, x_final_resposta, y_inicial_a, y_final_a},
+		{"What this expression “A bird in the hand is worth two in the bush.” means?", "a) “Deixa ir”", "b) “Um pássaro é tão bonito quanto dois.”", "c) “Mais vale um pássaro na mão do que dois voando.”", x_inicial_resposta, x_final_resposta, y_inicial_c, y_final_c},
+		{"Complete the phrase “___ we ___ enough time to savage this love” ","a) Do/had","b) Does/has","c) Do/have", x_inicial_resposta, x_final_resposta, y_inicial_c, y_final_c},
+		{"Complete the phrase “___ I go to the ______” ","a) May/bathroom","b) May/restroom","c) Do/restroom", x_inicial_resposta, x_final_resposta, y_inicial_b, y_final_b},
+		{"Complete the phrase “ __ ___ a student?” ","a) Do/you","b) Are/you","c) Does/you", x_inicial_resposta, x_final_resposta, y_inicial_a, y_final_a},
+		{"Translate this phrase “What do you want to do tomorrow?”","a) O que você vai fazer amanhã?","b) Você quer fazer algo amanhã?","c) O que você quer fazer amanhã?", x_inicial_resposta, x_final_resposta, y_inicial_c, y_final_c},
+		{"Translate this phrase “I wanna live like a star” ","a) Eu quero ser uma estrela","b) Eu quero viver como uma estrela","c) Eu sou uma estrela", x_inicial_resposta, x_final_resposta, y_inicial_b, y_final_b},
+		{"Translate this phrase “I intend to do something” ","a) Eu entendo para fazer algo","b) Eu pretendo fazer algo","c) Eu entendi que preciso fazer algo", x_inicial_resposta, x_final_resposta, y_inicial_b, y_final_b},
+		{"Translate this phrase “Actually, I don’t know what to do” ","a) Na verdade, eu não sei o que fazer","b) Atualmente, eu não sei o que fazer","c) Atualmente, eu não quero fazer nada", x_inicial_resposta, x_final_resposta, y_inicial_a, y_final_a},
+		{"Translate this phrase “Is it time to lunch?” ","a) É a hora do lanche?","b) É a hora de comer?","c) É a hora do almoço?", x_inicial_resposta, x_final_resposta, y_inicial_c, y_final_c},
+		{"Pass this phrase “You need this book” to interrogative form. ","a) Does you need this book?","b) Do you need this book?","c) Are you need this book?", x_inicial_resposta, x_final_resposta, y_inicial_b, y_final_b},
+		{"Pass this phrase “You went to the mall without me” to interrogative form. ","a) Did you go to the mall without me?","b) Do you went to the mall without me?","c) Went you to the mall without me?", x_inicial_resposta, x_final_resposta, y_inicial_a, y_final_a},
+		{"Pass this phrase “I want to eat protein” to negative form. ","a) I didn’t eat protein","b) I don’t want to eat protein","c) I don’t eat protein", x_inicial_resposta, x_final_resposta, y_inicial_b, y_final_b},
+		{"Pass this phrase “You are in the wrong way” to negative form.","a) You aren’t in the wrong way","b) You don’t are in the wrong way","c) You aren’t in the right way", x_inicial_resposta, x_final_resposta, y_inicial_a, y_final_a},
+		{"Pass this phrase “They aren’t cool with us” to affirmative form. ","a) They are cool with us","b) They do are cool with us","c) They don’t are cool with us", x_inicial_resposta, x_final_resposta, y_inicial_a, y_final_a},
+		{"Pass this phrase “Did he say that we need to go?” to affirmative form.","a) He said that we need to go","b) He said that we need to went","c) He say that we need to went", x_inicial_resposta, x_final_resposta, y_inicial_a, y_final_a},
+		{"What is the right way to answer: “How old are you?”","a) I have 15 years old","b) I am 15 years old","c) I do 15 years",x_inicial_resposta, x_final_resposta, y_inicial_b, y_final_b},
+		{"What is the right way to answer: “What’s your name?”","- a) My name is fulano","b) My name are fulano","c) My name do fulano",x_inicial_resposta, x_final_resposta, y_inicial_a, y_final_b}
 	};
 
 	int sair = 0;
 	int casa = 0;
 	int tela = MENU_PRINCIPAL;
 	int tecla = 0;
+
+	
 
 	int pantanoX[] = { 0, 140, 340, 515, 640, 880, 1070 };
 	int pantanoY[] = { 415, 280, 260, 210, 120, 120, 70 };
@@ -159,7 +212,7 @@ int main(void)
 			{
 				int btn_jogar = botoesFunction(evento, 850, 1250, 230, 320);
 				int btn_opcoes = botoesFunction(evento, 970, 1250, 380, 430);
-				int btn_tutorial = botoesFunction(evento, 900, 1265, 500, 540);
+				int btn_tutorial = botoesFunction(evento, 900, 1265, 500, 350);
 
 				if (btn_jogar || btn_opcoes || btn_tutorial)
 				{
@@ -175,7 +228,7 @@ int main(void)
 			{
 				int btn_jogar = botoesFunction(evento, 850, 1250, 230, 320);
 				int btn_opcoes = botoesFunction(evento, 970, 1250, 380, 430);
-				int btn_tutorial = botoesFunction(evento, 900, 1265, 500, 540);
+				int btn_tutorial = botoesFunction(evento, 900, 1265, 500, 350);
 
 				if (btn_jogar) {
 					tela = FASE_PANTANO;
@@ -268,9 +321,9 @@ int main(void)
 					}
 					al_draw_bitmap(IMAGEM_PERSONAGEM, pantanoX[casa], pantanoY[casa], 0);
 					al_flip_display();
-					cardFunction(IMAGEM_CARD, 355, 0, &carta[cardNumero].perguntas, &carta[cardNumero].resposta1, &carta[cardNumero].resposta2, &carta[cardNumero].resposta3);
+					cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero].perguntas, &carta[cardNumero].resposta1, &carta[cardNumero].resposta2, &carta[cardNumero].resposta3, &carta[cardNumero].x1_certo, &carta[cardNumero].x2_certo, &carta[cardNumero].y1_certo, &carta[cardNumero].y2_certo);
 					break;
-				}
+		}
 				tecla = 0;
 				break;
 			}
@@ -312,7 +365,7 @@ int main(void)
 						casa = 0;
 					}
 					al_draw_bitmap(IMAGEM_PERSONAGEM, cidadeX[casa], cidadeY[casa], 0);
-					cardFunction(IMAGEM_CARD, 355, 0, &carta[cardNumero].perguntas, &carta[cardNumero].resposta1, &carta[cardNumero].resposta2, &carta[cardNumero].resposta3);
+					cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero].perguntas, &carta[cardNumero].resposta1, &carta[cardNumero].resposta2, &carta[cardNumero].resposta3, &carta[cardNumero].x1_certo, &carta[cardNumero].x2_certo, &carta[cardNumero].y1_certo, &carta[cardNumero].y2_certo);
 					al_flip_display();
 
 					break;
@@ -357,7 +410,7 @@ int main(void)
 					
 					}
 					al_draw_bitmap(IMAGEM_PERSONAGEM, reinoX[casa], reinoY[casa], 0);
-					cardFunction(IMAGEM_CARD, 355, 0, &carta[cardNumero].perguntas, &carta[cardNumero].resposta1, &carta[cardNumero].resposta2, &carta[cardNumero].resposta3);
+					cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero].perguntas, &carta[cardNumero].resposta1, &carta[cardNumero].resposta2, &carta[cardNumero].resposta3, &carta[cardNumero].x1_certo, &carta[cardNumero].x2_certo, &carta[cardNumero].y1_certo, &carta[cardNumero].y2_certo);
 					al_flip_display();
 					
 					break;

@@ -1,25 +1,33 @@
 ﻿  main.c
-d:\pi\git\elektra\elektra\main.c(33): warning C4133: 'função': tipos incompatíveis - de 'structCards *' para 'const char *'
-d:\pi\git\elektra\elektra\main.c(34): warning C4133: 'função': tipos incompatíveis - de 'structCards *' para 'const char *'
-d:\pi\git\elektra\elektra\main.c(35): warning C4133: 'função': tipos incompatíveis - de 'structCards *' para 'const char *'
-d:\pi\git\elektra\elektra\main.c(36): warning C4133: 'função': tipos incompatíveis - de 'structCards *' para 'const char *'
-d:\pi\git\elektra\elektra\main.c(271): warning C4047: 'função': 'structCards *' difere em níveis de indireção de 'char (*)[550]'
-d:\pi\git\elektra\elektra\main.c(271): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 4
-d:\pi\git\elektra\elektra\main.c(271): warning C4047: 'função': 'structCards *' difere em níveis de indireção de 'char (*)[150]'
-d:\pi\git\elektra\elektra\main.c(271): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 5
-d:\pi\git\elektra\elektra\main.c(271): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 6
-d:\pi\git\elektra\elektra\main.c(271): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 7
-d:\pi\git\elektra\elektra\main.c(315): warning C4047: 'função': 'structCards *' difere em níveis de indireção de 'char (*)[550]'
-d:\pi\git\elektra\elektra\main.c(315): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 4
-d:\pi\git\elektra\elektra\main.c(315): warning C4047: 'função': 'structCards *' difere em níveis de indireção de 'char (*)[150]'
-d:\pi\git\elektra\elektra\main.c(315): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 5
-d:\pi\git\elektra\elektra\main.c(315): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 6
-d:\pi\git\elektra\elektra\main.c(315): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 7
-d:\pi\git\elektra\elektra\main.c(360): warning C4047: 'função': 'structCards *' difere em níveis de indireção de 'char (*)[550]'
-d:\pi\git\elektra\elektra\main.c(360): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 4
-d:\pi\git\elektra\elektra\main.c(360): warning C4047: 'função': 'structCards *' difere em níveis de indireção de 'char (*)[150]'
-d:\pi\git\elektra\elektra\main.c(360): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 5
-d:\pi\git\elektra\elektra\main.c(360): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 6
-d:\pi\git\elektra\elektra\main.c(360): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 7
-d:\pi\git\elektra\elektra\main.c(39): warning C4716: 'cardFunction': deve retornar um valor
+d:\pi\git\elektra\elektra\main.c(43): warning C4133: 'função': tipos incompatíveis - de 'structCards *' para 'const char *'
+d:\pi\git\elektra\elektra\main.c(44): warning C4133: 'função': tipos incompatíveis - de 'structCards *' para 'const char *'
+d:\pi\git\elektra\elektra\main.c(45): warning C4133: 'função': tipos incompatíveis - de 'structCards *' para 'const char *'
+d:\pi\git\elektra\elektra\main.c(46): warning C4133: 'função': tipos incompatíveis - de 'structCards *' para 'const char *'
+d:\pi\git\elektra\elektra\main.c(72): warning C4047: 'função': 'int' difere em níveis de indireção de 'structCards *'
+d:\pi\git\elektra\elektra\main.c(72): warning C4024: 'botoesFunction': tipos diferentes para parâmetro formal e real 2
+d:\pi\git\elektra\elektra\main.c(72): warning C4024: 'botoesFunction': tipos diferentes para parâmetro formal e real 3
+d:\pi\git\elektra\elektra\main.c(72): warning C4024: 'botoesFunction': tipos diferentes para parâmetro formal e real 4
+d:\pi\git\elektra\elektra\main.c(72): warning C4024: 'botoesFunction': tipos diferentes para parâmetro formal e real 5
+d:\pi\git\elektra\elektra\main.c(324): warning C4047: 'função': 'structCards *' difere em níveis de indireção de 'char (*)[550]'
+d:\pi\git\elektra\elektra\main.c(324): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 5
+d:\pi\git\elektra\elektra\main.c(324): warning C4047: 'função': 'structCards *' difere em níveis de indireção de 'char (*)[150]'
+d:\pi\git\elektra\elektra\main.c(324): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 6
+d:\pi\git\elektra\elektra\main.c(324): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 7
+d:\pi\git\elektra\elektra\main.c(324): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 8
+d:\pi\git\elektra\elektra\main.c(324): warning C4133: 'função': tipos incompatíveis - de 'int *' para 'structCards *'
+d:\pi\git\elektra\elektra\main.c(368): warning C4047: 'função': 'structCards *' difere em níveis de indireção de 'char (*)[550]'
+d:\pi\git\elektra\elektra\main.c(368): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 5
+d:\pi\git\elektra\elektra\main.c(368): warning C4047: 'função': 'structCards *' difere em níveis de indireção de 'char (*)[150]'
+d:\pi\git\elektra\elektra\main.c(368): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 6
+d:\pi\git\elektra\elektra\main.c(368): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 7
+d:\pi\git\elektra\elektra\main.c(368): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 8
+d:\pi\git\elektra\elektra\main.c(368): warning C4133: 'função': tipos incompatíveis - de 'int *' para 'structCards *'
+d:\pi\git\elektra\elektra\main.c(413): warning C4047: 'função': 'structCards *' difere em níveis de indireção de 'char (*)[550]'
+d:\pi\git\elektra\elektra\main.c(413): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 5
+d:\pi\git\elektra\elektra\main.c(413): warning C4047: 'função': 'structCards *' difere em níveis de indireção de 'char (*)[150]'
+d:\pi\git\elektra\elektra\main.c(413): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 6
+d:\pi\git\elektra\elektra\main.c(413): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 7
+d:\pi\git\elektra\elektra\main.c(413): warning C4024: 'cardFunction': tipos diferentes para parâmetro formal e real 8
+d:\pi\git\elektra\elektra\main.c(413): warning C4133: 'função': tipos incompatíveis - de 'int *' para 'structCards *'
+d:\pi\git\elektra\elektra\main.c(88): warning C4716: 'cardFunction': deve retornar um valor
   elektra.vcxproj -> D:\PI\git\elektra\Debug\elektra.exe

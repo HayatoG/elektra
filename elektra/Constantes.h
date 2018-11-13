@@ -42,7 +42,14 @@ ALLEGRO_FONT *fonteCard = NULL;
 
 // CARDS
 
-
+#define X_INICIAL_RESPOSTA 540;
+#define X_FINAL_RESPOSTA 750;
+#define Y_INICIAL_A 380;
+#define Y_FINAL_A 430;
+#define Y_INICIAL_B 480;
+#define Y_FINAL_B 530;
+#define Y_INICIAL_C 580;
+#define Y_FINAL_C 630;
 
 //Struct para declaração de posições
 typedef struct
