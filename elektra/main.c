@@ -158,6 +158,7 @@ int main(void)
 	IMAGEM_FASE3 = al_load_bitmap("Imagens/Fase_3.png");
 	IMAGEM_PERSONAGEM = al_load_bitmap("Imagens/Personagem.png");
 	IMAGEM_CARD = al_load_bitmap("Imagens/EsbocoCards_1.png");
+	IMAGEM_CREDITOS = al_load_bitmap("Imagens/TelaCreditos.png");
 
 	fila_eventos = al_create_event_queue();
 
@@ -236,8 +237,9 @@ int main(void)
 				int btn_voltar = botoesFunction(evento, 30, 90, 90, 140);
 				int btn_som_off = botoesFunction(evento, 520, 610, 260, 340);
 				int btn_som_on = botoesFunction(evento, 670, 770, 260, 340);
+				int btn_creditos = botoesFunction(evento, 520, 770, 600, 680);
 
-				if (btn_voltar || btn_som_off || btn_som_on)
+				if (btn_voltar || btn_som_off || btn_som_on || btn_creditos)
 				{
 					al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
 				}
@@ -252,22 +254,22 @@ int main(void)
 				int btn_voltar = botoesFunction(evento, 30, 90, 90, 140);
 				int btn_som_off = botoesFunction(evento, 520, 610, 260, 340);
 				int btn_som_on = botoesFunction(evento, 670, 770, 260, 340);
+				int btn_creditos = botoesFunction(evento, 520, 770, 600, 680);
 
 				if (btn_voltar)
 				{
 					al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
 					al_flip_display();
 					tela = 1;
-				}
-
-				if (btn_som_off)
+				}else if (btn_som_off)
 				{
 					al_set_audio_stream_playing(theme, false);
 				}
-
-				if (btn_som_on)
-				{
+				else if (btn_som_on){
 					al_set_audio_stream_playing(theme, true);
+				}
+				else if (btn_creditos) {
+					tela = TELA_CREDITOS;
 				}
 			}
 			break;
@@ -398,6 +400,33 @@ int main(void)
 				}
 				tecla = 0;
 				break;
+			}
+			break;
+		case 6:
+			break;
+		case 7:
+			al_draw_bitmap(IMAGEM_CREDITOS, 0, 0, 0);
+
+			al_flip_display();
+
+			if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
+			{
+				int btn_voltar = botoesFunction(evento, 30, 90, 90, 140);
+				
+				if (btn_voltar )
+				{
+					al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
+				}
+				else
+				{
+					al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+				}
+
+			}
+			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
+			{
+				int btn_voltar = botoesFunction(evento, 30, 90, 90, 140);
+				if(btn_voltar) tela = TELA_OPCOES;
 			}
 			break;
 		}
