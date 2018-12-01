@@ -1,3 +1,0 @@
-﻿  main.c
-d:\pi\git\elektra\elektra\main.c(21): warning C4716: 'error_msg': deve retornar um valor
-  elektra.vcxproj -> D:\PI\git\elektra\Debug\elektra.exe
