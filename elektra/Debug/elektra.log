@@ -1,7 +1,0 @@
-﻿  main.c
-d:\pi\git\elektra\elektra\main.c(64): warning C4013: 'andaJacare' indefinido; assumindo extern retornando int
-d:\pi\git\elektra\elektra\main.c(70): warning C4033: 'cardFunction' deve retornar um valor
-d:\pi\git\elektra\elektra\main.c(94): warning C4033: 'andaJacare' deve retornar um valor
-d:\pi\git\elektra\elektra\main.c(95): warning C4716: 'andaJacare': deve retornar um valor
-d:\pi\git\elektra\elektra\main.c(79): warning C4715: 'cardFunction': nem todos os caminhos de controle retornam um valor
-  elektra.vcxproj -> D:\PI\git\elektra\Debug\elektra.exe
