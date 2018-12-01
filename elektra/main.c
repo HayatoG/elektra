@@ -217,7 +217,6 @@ int main(void)
 
 				if (btn_jogar) {
 					tela = FASE_PANTANO;
-					al_draw_bitmap(IMAGEM_PERSONAGEM, pantanoX[0], pantanoY[0], 0);
 				}
 				else if (btn_opcoes) {
 					al_draw_bitmap(IMAGEM_TELAOPCOES, 0, 0, 0);
@@ -274,7 +273,8 @@ int main(void)
 			break;
 		case 3:
 			al_draw_bitmap(IMAGEM_FASE1, 0, 0, 0);
-			
+
+			al_draw_bitmap(IMAGEM_PERSONAGEM, pantanoX[casa], pantanoY[casa], 0);
 			al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 995, 435, ALLEGRO_ALIGN_CENTRE, pressSpace);
 			al_flip_display();
 
