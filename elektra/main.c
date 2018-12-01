@@ -23,8 +23,9 @@ int botoesFunction(ALLEGRO_EVENT e, int x1, int x2, int y1, int y2) {
 int cardFunction(ALLEGRO_EVENT evento, ALLEGRO_BITMAP *cartao, int x, int y, structCards *cardsStruct, int fase, int casaAtual) {
 	
 	int cardOpen = 1;
+	int err = 0;
 	ALLEGRO_COLOR preto = al_map_rgb(0, 0, 0);
-	ALLEGRO_COLOR verde = al_map_rgb(4, 94, 23);
+	ALLEGRO_COLOR verde = al_map_rgb(255, 255, 255);
 	fonteCard = al_load_font("fontePedra.ttf", 24, 0);
 
 	al_draw_bitmap(cartao, x, y, 0);
@@ -61,20 +62,37 @@ int cardFunction(ALLEGRO_EVENT evento, ALLEGRO_BITMAP *cartao, int x, int y, str
 				
 				if (resposta_certa) {
 					printf("Resposta certa");
+					//if (fase == 4) {
+					//	al_draw_bitmap(IMAGEM_PERSONAGEM, pantanoX[casaAtual], pantanoY[casaAtual], 0);
+					//	al_flip_display();
+					//}
+					//else if (fase == 5) {
+					//	al_draw_bitmap(IMAGEM_PERSONAGEM, cidadeX[casaAtual], cidadeY[casaAtual], 0);
+					//	al_flip_display();
+					//}
+					//else if (fase == 6) {
+					//	al_draw_bitmap(IMAGEM_PERSONAGEM, reinoX[casaAtual], reinoY[casaAtual], 0);
+					//	al_flip_display();
+					//}
 					andaJacare(fase, casaAtual);
 					cardOpen = 0;
 				}
 				else {
 					printf("Resposta errada");
-					cardOpen = 0;
-					return;
+					err = 1;
+					do{
+					al_draw_bitmap(IMAGEM_AVISO, x, y, 0);
+					al_flip_display();
+					al_rest(1.0);
+					err = 0;
+					} while (err==1);
+					al_flip_display();
+					cardOpen = 1;
 				}
 				
 			}
 		}
 	} while (cardOpen==1);
-	return 0;
-
 	
 }
 int andaJacare(int tela, int casa) {
@@ -89,9 +107,7 @@ int andaJacare(int tela, int casa) {
 	else if (tela == 6) {
 		al_draw_bitmap(IMAGEM_PERSONAGEM, reinoX[casa], reinoY[casa], 0);
 		al_flip_display();
-
 	}
-	return;
 }
 
 
@@ -104,7 +120,7 @@ int main(void)
 		{"What this expression “A bird in the hand is worth two in the bush.” means?", "a) “Deixa ir”", "b) “Os dois pássaros são bonitos.”", "c) “Mais vale um pássaro na mão do que dois voando.”",  y_inicial_c, y_final_c},
 		{"Complete the phrase “___ we ___ enough time to savage this love” ","a) Do/had","b) Does/has","c) Do/have",  y_inicial_c, y_final_c},
 		{"Complete the phrase “___ I go to the ______” ","a) May/bathroom","b) May/restroom","c) Do/restroom",  y_inicial_b, y_final_b},
-		{"Complete the phrase “ __ ___ a student?” ","a) Do/you","b) Are/you","c) Does/you",  y_inicial_a, y_final_a},
+		{"Complete the phrase “ __ ___ a student?” ","a) Do/you","b) Are/you","c) Does/you",  y_inicial_b, y_final_b},
 		{"Translate this phrase “What do you want to do tomorrow?”","a) O que você vai fazer amanhã?","b) Você quer fazer algo amanhã?","c) O que você quer fazer amanhã?",  y_inicial_c, y_final_c},
 		{"Translate this phrase “I wanna live like a star” ","a) Eu quero ser uma estrela","b) Eu quero viver como uma estrela","c) Eu sou uma estrela",  y_inicial_b, y_final_b},
 		{"Translate this phrase “I intend to do something” ","a) Eu entendo para fazer algo","b) Eu pretendo fazer algo","c) Eu entendi que preciso fazer algo",  y_inicial_b, y_final_b},
@@ -159,6 +175,9 @@ int main(void)
 	IMAGEM_PERSONAGEM = al_load_bitmap("Imagens/Personagem.png");
 	IMAGEM_CARD = al_load_bitmap("Imagens/EsbocoCards_1.png");
 	IMAGEM_CREDITOS = al_load_bitmap("Imagens/TelaCreditos.png");
+	IMAGEM_CASTELO = al_load_bitmap("Imagens/final.jpg");
+	IMAGEM_TELAFINAL = al_load_bitmap("Imagens/TelaFinal.png");
+	IMAGEM_AVISO = al_load_bitmap("Imagens/aviso1.png");
 
 	fila_eventos = al_create_event_queue();
 
@@ -194,6 +213,8 @@ int main(void)
 		}
 		switch (tela) {
 		case 1:
+			al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
+			al_flip_display();
 			if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
 			{
 				int btn_jogar = botoesFunction(evento, 850, 1250, 230, 320);
@@ -275,7 +296,6 @@ int main(void)
 			break;
 		case 3:
 			al_draw_bitmap(IMAGEM_FASE1, 0, 0, 0);
-
 			al_draw_bitmap(IMAGEM_PERSONAGEM, pantanoX[casa], pantanoY[casa], 0);
 			al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 995, 435, ALLEGRO_ALIGN_CENTRE, pressSpace);
 			al_flip_display();
@@ -316,7 +336,7 @@ int main(void)
 			break;
 		case 4:
 			al_draw_bitmap(IMAGEM_FASE2, 0, 0, 0);
-			//al_draw_bitmap(IMAGEM_PERSONAGEM, cidadeX[casa], cidadeY[casa], 0);
+			al_draw_bitmap(IMAGEM_PERSONAGEM, cidadeX[casa], cidadeY[casa], 0);
 			al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 490, 635, ALLEGRO_ALIGN_CENTRE, pressSpace);
 			al_flip_display();
 
@@ -360,7 +380,7 @@ int main(void)
 			break;
 		case 5:
 			al_draw_bitmap(IMAGEM_FASE3, 0, 0, 0);
-			//al_draw_bitmap(IMAGEM_PERSONAGEM, reinoX[casa], reinoY[casa], 0);
+			al_draw_bitmap(IMAGEM_PERSONAGEM, reinoX[casa], reinoY[casa], 0);
 			al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 235, 422, ALLEGRO_ALIGN_CENTRE, pressSpace);
 			al_flip_display();
 
@@ -389,11 +409,16 @@ int main(void)
 					al_flip_display();
 					al_rest(2);
 					casa += x;
-					if (casa >= 4) {
-						tela = MENU_PRINCIPAL;
+					if (casa > 4) {
+						al_draw_bitmap(IMAGEM_CASTELO, 0, 0, 0);
+						al_flip_display();
+						al_rest(3);
+						casa = 0;
+						tela = TELA_FINAL;
 					}
-					
-					cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero], tela, casa);
+					else {
+						cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero], tela, casa);
+					}
 					al_flip_display();
 					break;
 
@@ -406,7 +431,6 @@ int main(void)
 			break;
 		case 7:
 			al_draw_bitmap(IMAGEM_CREDITOS, 0, 0, 0);
-
 			al_flip_display();
 
 			if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
@@ -427,6 +451,29 @@ int main(void)
 			{
 				int btn_voltar = botoesFunction(evento, 30, 90, 90, 140);
 				if(btn_voltar) tela = TELA_OPCOES;
+			}
+			break;
+		case 8:
+			al_draw_bitmap(IMAGEM_TELAFINAL, 0, 0, 0);
+			al_flip_display();
+			if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
+			{
+				int btn_voltar = botoesFunction(evento, 520, 770, 260, 400);
+
+				if (btn_voltar)
+				{
+					al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
+				}
+				else
+				{
+					al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+				}
+
+			}
+			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
+			{
+				int btn_voltar = botoesFunction(evento, 520, 770, 260, 400);
+				if (btn_voltar) { tela = MENU_PRINCIPAL; }
 			}
 			break;
 		}
