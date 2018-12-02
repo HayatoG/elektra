@@ -47,7 +47,6 @@ ALLEGRO_FONT *fonteCard = NULL;
 #define TELA_FINAL 8;
 
 // CARDS
-
 #define X_INICIAL_RESPOSTA 540;
 #define X_FINAL_RESPOSTA 750;
 #define Y_INICIAL_A 380;
@@ -67,20 +66,25 @@ typedef struct structCards {
 	int y2_certo;
 }structCards;
 
-const int x_inicial_resposta = X_INICIAL_RESPOSTA;
-const int x_final_resposta = X_FINAL_RESPOSTA;
-const int y_inicial_a = Y_INICIAL_A;
-const int y_final_a = Y_FINAL_A;
-const int y_inicial_b = Y_INICIAL_B;
-const int y_final_b = Y_FINAL_B;
-const int y_inicial_c = Y_INICIAL_C;
-const int y_final_c = Y_FINAL_C;
+typedef struct structPosicoes {
+	int posicao_x;
+	int posicao_y;
+} structPosicoes;
 
-const int pantanoX[] = { 0, 140, 340, 515, 640, 880, 1070 };
+const int x_inicial_resposta = X_INICIAL_RESPOSTA;
+const int x_final_resposta   = X_FINAL_RESPOSTA;
+const int y_inicial_a        = Y_INICIAL_A;
+const int y_final_a          = Y_FINAL_A;
+const int y_inicial_b        = Y_INICIAL_B;
+const int y_final_b			 = Y_FINAL_B;
+const int y_inicial_c		 = Y_INICIAL_C;
+const int y_final_c			 = Y_FINAL_C;
+
+/*const int pantanoX[] = { 0, 140, 340, 515, 640, 880, 1070 };
 const int pantanoY[] = { 415, 280, 260, 210, 120, 120, 70 };
 const int cidadeX[] = { 20,  200, 380, 500, 650, 790, 955, 1040 };
 const int cidadeY[] = { 207, 207, 207, 135, 70, 70, 70, 5 };
 const int reinoX[] = { -13, 130, 260, 790 };
-const int reinoY[] = { -30, -30, 30, 330 };
+const int reinoY[] = { -30, -30, 30, 330 };*/
 
 

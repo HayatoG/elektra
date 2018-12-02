@@ -81,6 +81,8 @@ void cardFunction(ALLEGRO_EVENT evento, ALLEGRO_BITMAP *cartao, int x, int y, st
 					al_draw_bitmap(IMAGEM_AVISO, 0, 0, 0);
 					al_flip_display();
 					al_rest(2);
+					al_draw_bitmap(cartao, x, y, 0);
+					al_flip_display();
 					cardOpen = 1;
 				}
 
@@ -345,6 +347,7 @@ int main(void)
 					int cardNumero = rand() % 20;
 					char i[10];
 					sprintf_s(i, 10, "%d", x);
+
 					al_draw_textf(fonte, al_map_rgb(0, 0, 0), 355, 135, ALLEGRO_ALIGN_CENTRE, i);
 					al_flip_display();
 					al_rest(2);
