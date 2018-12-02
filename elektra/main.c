@@ -21,8 +21,8 @@ int botoesFunction(ALLEGRO_EVENT e, int x1, int x2, int y1, int y2) {
 }
 
 int andaJacare(structPosicoes *posicoesStruct) {
-		al_draw_bitmap(IMAGEM_PERSONAGEM, posicoesStruct->posicao_x, posicoesStruct->posicao_y, 0);
-		al_flip_display();
+	al_draw_bitmap(IMAGEM_PERSONAGEM, posicoesStruct->posicao_x, posicoesStruct->posicao_y, 0);
+	al_flip_display();
 }
 
 void cardFunction(ALLEGRO_EVENT evento, ALLEGRO_BITMAP *cartao, int x, int y, structCards *cardsStruct, structPosicoes *posiceosStruct) {
@@ -40,7 +40,7 @@ void cardFunction(ALLEGRO_EVENT evento, ALLEGRO_BITMAP *cartao, int x, int y, st
 	al_draw_multiline_text(fonteCard, preto, 540, 580, 230, 40, 0, cardsStruct->resposta3);
 	al_flip_display();
 
-	while (cardOpen == 1){
+	while (cardOpen == 1) {
 		al_init_timeout(&timeout, 0.05);
 
 		int tem_eventos = al_wait_for_event_until(fila_eventos, &evento, &timeout);
@@ -159,6 +159,7 @@ int main(void)
 	IMAGEM_TELAFINAL = al_load_bitmap("Imagens/TelaFinal.png");
 	IMAGEM_AVISO = al_load_bitmap("Imagens/aviso1.png");
 
+
 	fila_eventos = al_create_event_queue();
 
 	al_register_event_source(fila_eventos, al_get_keyboard_event_source());
@@ -168,7 +169,7 @@ int main(void)
 	al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
 	al_attach_audio_stream_to_mixer(starting, al_get_default_mixer());
 	al_set_audio_stream_playmode(starting, ALLEGRO_PLAYMODE_ONCE);
-	al_set_audio_stream_playing(starting, false);
+	al_set_audio_stream_playing(starting, true);
 	al_flip_display();
 	al_rest(4.0);
 	al_destroy_audio_stream(starting);
@@ -177,7 +178,7 @@ int main(void)
 	al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
 	al_attach_audio_stream_to_mixer(theme, al_get_default_mixer());
 	al_set_audio_stream_playmode(theme, ALLEGRO_PLAYMODE_LOOP);
-	al_set_audio_stream_playing(theme, false);
+	al_set_audio_stream_playing(theme, true);
 	al_flip_display();
 
 	al_register_event_source(fila_eventos, al_get_mouse_event_source());
@@ -278,7 +279,7 @@ int main(void)
 		case 3:
 			al_draw_bitmap(IMAGEM_FASE1, 0, 0, 0);
 			andaJacare(&posicoes[casa]);
-			printf("\nDESENHOU PERSONAGEM\n");
+			tecla = 0;
 			al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 995, 435, ALLEGRO_ALIGN_CENTRE, pressSpace);
 			al_flip_display();
 
@@ -286,34 +287,28 @@ int main(void)
 
 			if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
 				switch (evento.keyboard.keycode) {
-					tecla = 0;
 				case ALLEGRO_KEY_SPACE:
-					printf("PRESSIONOU ESPACO");
-					printf("%d", tecla);
 					tecla = 1;
-					printf("%d", tecla);
 					break;
 				}
 			}
 			if (tecla) {
-				printf("\nENTROU NO IF DA TECLA\n");
-				printf("%d", tecla);
 				switch (tecla) {
 				case 1:
 					srand(time(NULL));
 					int x = 1 + (rand() % 6);
-					int cardNumero = rand() % 20;
+						int cardNumero = rand() % 20;
 					char i[10];
 					snprintf(i, 10, "%d", x);
 					al_draw_textf(fonte, al_map_rgb(0, 0, 0), 1125, 480, ALLEGRO_ALIGN_CENTRE, i);
 					al_flip_display();
 					al_rest(2);
 					casa += x;
-						 cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero], &posicoes[casa]);
-						 if (casa >= 7) {
-							 tela = FASE_CIDADE;
-							 casa = 7;
-						 }
+					if (casa >= 7) {
+						tela = FASE_CIDADE;
+						casa = 7;
+					}
+					cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero], &posicoes[casa]);
 					break;
 					tecla = 0;
 				}
@@ -323,8 +318,8 @@ int main(void)
 			break;
 		case 4:
 			al_draw_bitmap(IMAGEM_FASE2, 0, 0, 0);
-			
 			andaJacare(&posicoes[casa]);
+			tecla = 0;
 			al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 490, 635, ALLEGRO_ALIGN_CENTRE, pressSpace);
 			al_flip_display();
 			al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
@@ -353,8 +348,8 @@ int main(void)
 						tela = FASE_REINO;
 						casa = 15;
 					}
-						cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero], &posicoes[casa]);
-					
+					cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero], &posicoes[casa]);
+
 					al_flip_display();
 
 					break;
@@ -396,16 +391,17 @@ int main(void)
 					al_flip_display();
 					al_rest(2);
 					casa += x;
-					if (casa >= 19) {
+					if (casa >= 18) {
 						al_draw_bitmap(IMAGEM_CASTELO, 0, 0, 0);
 						al_flip_display();
 						al_rest(4);
 						casa = 0;
 						tela = TELA_FINAL;
-					}else{
+					}
+					else {
 						cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero], &posicoes[casa]);
 					}
-						
+
 					al_flip_display();
 					break;
 
@@ -464,7 +460,6 @@ int main(void)
 			}
 			break;
 		}
-
 	}
 
 	al_destroy_display(janela);
