@@ -402,8 +402,10 @@ int main(void)
 						al_rest(4);
 						casa = 0;
 						tela = TELA_FINAL;
-					}
+					}else{
 						cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero], &posicoes[casa]);
+					}
+						
 					al_flip_display();
 					break;
 
