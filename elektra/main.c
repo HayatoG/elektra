@@ -1,6 +1,3 @@
-// Parâmetro para rodar:
-//gcc -lallegro -lallegro_main -lallegro_image -lallegro_ttf -lallegro_font -lallegro_primitives -lallegro_audio -lallegro_acodec -o smart main.c
-// Os arquivos de cabeçalho
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_native_dialog.h>
@@ -174,7 +171,6 @@ int main(void)
 	IMAGEM_TELAFINAL = al_load_bitmap("Imagens/TelaFinal.png");
 	IMAGEM_AVISO = al_load_bitmap("Imagens/aviso1.png");
 
-
 	fila_eventos = al_create_event_queue();
 
 	al_register_event_source(fila_eventos, al_get_keyboard_event_source());
@@ -296,38 +292,30 @@ int main(void)
 			andaJacare(&posicoes[casa]);
 			al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 995, 435, ALLEGRO_ALIGN_CENTRE, pressSpace);
 			al_flip_display();
-
 			al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
 
-			if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
-				switch (evento.keyboard.keycode) {
-				case ALLEGRO_KEY_SPACE:
-					tecla = 1;
-					break;
-				}
-			}
-			if (tecla) {
-				switch (tecla) {
-				case 1:
-					x = 1 + (rand() % 4);
-					int cardNumero = array[c];
-					char i[10];
-					snprintf(i, 10, "%d", x);
-					al_draw_textf(fonte, al_map_rgb(0, 0, 0), 1125, 480, ALLEGRO_ALIGN_CENTRE, i);
-					al_flip_display();
-					al_rest(2);
-					casa += x;
-					if (casa >= 7) {
-						tela = FASE_CIDADE;
-
-						casa = 7;
-					}
-					cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero], &posicoes[casa]);
-					break;
+			if (evento.type == ALLEGRO_EVENT_KEY_DOWN && evento.keyboard.keycode == ALLEGRO_KEY_SPACE)
+				tecla = 1;
+			switch (tecla) {
+			case 1:
+				x = 1 + (rand() % 4);
+				int cardNumero = array[c];
+				char i[10];
+				snprintf(i, 10, "%d", x);
+				al_draw_textf(fonte, al_map_rgb(0, 0, 0), 1125, 480, ALLEGRO_ALIGN_CENTRE, i);
+				al_flip_display();
+				al_rest(2);
+				casa += x;
+				if (casa >= 7) {
+					tela = FASE_CIDADE;
+					casa = 7;
 					tecla = 0;
 				}
-				c++;
+				cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero], &posicoes[casa]);
 				tecla = 0;
+				c++;
+				break;
+			case 0:
 				break;
 			}
 			break;
@@ -338,14 +326,8 @@ int main(void)
 			al_flip_display();
 			al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
 
-			if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
-				switch (evento.keyboard.keycode) {
-				case ALLEGRO_KEY_SPACE:
-					tecla = 1;
-					break;
-				}
-
-			}
+			if (evento.type == ALLEGRO_EVENT_KEY_DOWN && evento.keyboard.keycode == ALLEGRO_KEY_SPACE)
+				tecla = 1;
 			if (tecla) {
 				switch (tecla) {
 				case 1:
@@ -362,35 +344,25 @@ int main(void)
 						casa = 15;
 					}
 					cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero], &posicoes[casa]);
-
-					al_flip_display();
-
+					tecla = 0;
+					c++;
+					tecla = 0;
 					break;
-
+				case 0:
+					break;
 				}
-				c++;
-				tecla = 0;
-				break;
 			}
-			break;
+				break;
 		case 5:
 			al_draw_bitmap(IMAGEM_FASE3, 0, 0, 0);
 			andaJacare(&posicoes[casa]);
 			al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 235, 422, ALLEGRO_ALIGN_CENTRE, pressSpace);
 			al_flip_display();
-
 			al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
 
-			if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
-				switch (evento.keyboard.keycode) {
-				case ALLEGRO_KEY_SPACE:
-					tecla = 1;
-					break;
-				}
-
-			}
+			if (evento.type == ALLEGRO_EVENT_KEY_DOWN && evento.keyboard.keycode == ALLEGRO_KEY_SPACE)
+				tecla = 1;
 			if (tecla) {
-
 				switch (tecla) {
 				case 1:
 					x = 1 + (rand() % 1);
@@ -409,17 +381,17 @@ int main(void)
 						al_rest(4);
 						casa = 0;
 						tela = TELA_FINAL;
+						tecla = 0;
 					}
 					else {
 						cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero], &posicoes[casa]);
 						c++;
+						tecla = 0;
 					}
-					al_flip_display();
 					break;
-
+				case 0:
+					break;
 				}
-				tecla = 0;
-				break;
 			}
 			break;
 		case 6:
@@ -471,6 +443,7 @@ int main(void)
 				if (btn_voltar) { tela = MENU_PRINCIPAL; }
 			}
 			break;
+			
 		}
 	}
 
