@@ -32,8 +32,8 @@ void cardFunction(ALLEGRO_EVENT evento, ALLEGRO_BITMAP *cartao, int x, int y, st
 
 	ALLEGRO_COLOR preto = al_map_rgb(0, 0, 0);
 	ALLEGRO_COLOR verde = al_map_rgb(255, 255, 255);
-	fonteCard = al_load_font("fontePedra.ttf", 23, 0);
-	fonteCardPergunta = al_load_font("fontePedra.ttf", 26, 0);
+	fonteCard = al_load_font("fontePedra.ttf", 24, 0);
+	fonteCardPergunta = al_load_font("fontePedra.ttf", 25, 0);
 
 	al_draw_bitmap(cartao, x, y, 0);
 	al_draw_multiline_text(fonteCardPergunta, verde, 555, 120, 250, 50, 0, cardsStruct->perguntas);
@@ -125,15 +125,15 @@ int main(void)
 	int tecla = 0;
 	char pressSpace[100] = { "Pressione espaço para rolar os dados." };
 
-	int array[20];
+	int array[19];
 	int c;
 	int x;
 
 	srand(time(NULL));
-	for (c = 0; c < 20; c++) {
+	for (c = 0; c < 19; c++) {
 		array[c] = c + 1;
 	}
-	for (c = 20 - 1; c > 0; c--) {
+	for (c = 19 - 1; c > 0; c--) {
 		int j = rand() % (c + 1);
 		swap(&array[c], &array[j]);
 	}
