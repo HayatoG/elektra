@@ -12,6 +12,7 @@
 #include "Constantes.h"
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 ALLEGRO_EVENT evento;
 ALLEGRO_TIMEOUT timeout;
@@ -20,7 +21,7 @@ int botoesFunction(ALLEGRO_EVENT e, int x1, int x2, int y1, int y2) {
 	return e.mouse.x >= x1 && e.mouse.x <= x2 && e.mouse.y >= y1 && e.mouse.y <= y2;
 }
 
-int andaJacare(structPosicoes *posicoesStruct) {
+void andaJacare(structPosicoes *posicoesStruct) {
 	al_draw_bitmap(IMAGEM_PERSONAGEM, posicoesStruct->posicao_x, posicoesStruct->posicao_y, 0);
 	al_flip_display();
 }
@@ -89,11 +90,17 @@ void cardFunction(ALLEGRO_EVENT evento, ALLEGRO_BITMAP *cartao, int x, int y, st
 	}
 }
 
+void swap(int *a, int *b) {
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
 int main(void)
 {
 	structCards carta[] = {
 		{"What this expression “Strike while the iron is hot.” means?", "a) “Sua batata tá esquentando”", "b) “A coisa tá feia”", "c) “Aproveite enquanto é tempo”",  y_inicial_c, y_final_c},
-		{"What this expression “That’s hardly the issue.” means?", "a) “Essa é uma questão difícil”", "b) “Isso não vem ao caso”", "c) “Isso é mais difícil do que eu pensei”",  y_inicial_b, y_final_b},
+		{"What this expression “That’s hardly the issue.” means?", "a) “Essa é uma questão difícil”", "b) “Isso não vem ao caso”", "c) “Isso é mais difícil ",  y_inicial_b, y_final_b},
 		{"What this expression “I got out of bed on the wrong side.” means?", "a) “Levantei com o pé esquerdo”","b) “Cai da cama nessa manhã”","c) “Sai da cama pelo lado errado”",  y_inicial_a, y_final_a},
 		{"What this expression “A bird in the hand is worth two in the bush.” means?", "a) “Deixa ir”", "b) “Os dois pássaros são bonitos.”", "c) “Mais vale um pássaro na mão do que dois voando.”",  y_inicial_c, y_final_c},
 		{"Complete the phrase “___ we ___ enough time to savage this love” ","a) Do/had","b) Does/has","c) Do/have",  y_inicial_c, y_final_c},
@@ -111,7 +118,7 @@ int main(void)
 		{"Pass this phrase “They aren’t cool with us” to affirmative form. ","a) They are cool with us","b) They do are cool with us","c) They don’t are cool with us",  y_inicial_a, y_final_a},
 		{"Pass this phrase “Did he say that we need to go?” to affirmative form.","a) He said that we need to go","b) He said that we need to went","c) He say that we need to went",  y_inicial_a, y_final_a},
 		{"What is the right way to answer: “How old are you?”","a) I have 15 years old","b) I am 15 years old","c) I do 15 years", y_inicial_b, y_final_b},
-		{"What is the right way to answer: “What’s your name?”","- a) My name is fulano","b) My name are fulano","c) My name do fulano", y_inicial_a, y_final_a}
+		{"What is the right way to answer: “What’s your name?”","a) My name is fulano","b) My name are fulano","c) My name do fulano", y_inicial_a, y_final_a}
 	};
 	structPosicoes posicoes[] = {
 	{0, 415}, {140, 280}, {340, 260}, {515,210}, {640,120}, {880,120}, {1070,70}, {20,207}, {200,207}, {380,207}, {500,135}, {650,70}, {790,70}, {955,70}, {1040,5}, {-13,-30}, {130,-30}, {260,30}, {790,330}
@@ -122,6 +129,19 @@ int main(void)
 	int tela = MENU_PRINCIPAL;
 	int tecla = 0;
 	char pressSpace[100] = { "Pressione espaço para rolar os dados." };
+
+	int array[20];
+	int c;
+	int x;
+
+	srand(time(NULL));
+	for (c = 0; c < 20; c++) {
+		array[c] = c + 1;
+	}
+	for (c = 20 - 1; c > 0; c--) {
+		int j = rand() % (c + 1);
+		swap(&array[c], &array[j]);
+	}
 
 	//Inicialização de libs do Allegro
 	al_init();
@@ -169,7 +189,7 @@ int main(void)
 	al_draw_bitmap(IMAGEM_SPLASHSCREEN, 0, 0, 0);
 	al_attach_audio_stream_to_mixer(starting, al_get_default_mixer());
 	al_set_audio_stream_playmode(starting, ALLEGRO_PLAYMODE_ONCE);
-	al_set_audio_stream_playing(starting, true);
+	al_set_audio_stream_playing(starting, false);
 	al_flip_display();
 	al_rest(4.0);
 	al_destroy_audio_stream(starting);
@@ -178,7 +198,7 @@ int main(void)
 	al_draw_bitmap(IMAGEM_MENUINICIAL, 0, 0, 0);
 	al_attach_audio_stream_to_mixer(theme, al_get_default_mixer());
 	al_set_audio_stream_playmode(theme, ALLEGRO_PLAYMODE_LOOP);
-	al_set_audio_stream_playing(theme, true);
+	al_set_audio_stream_playing(theme, false);
 	al_flip_display();
 
 	al_register_event_source(fila_eventos, al_get_mouse_event_source());
@@ -279,7 +299,6 @@ int main(void)
 		case 3:
 			al_draw_bitmap(IMAGEM_FASE1, 0, 0, 0);
 			andaJacare(&posicoes[casa]);
-			tecla = 0;
 			al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 995, 435, ALLEGRO_ALIGN_CENTRE, pressSpace);
 			al_flip_display();
 
@@ -295,9 +314,8 @@ int main(void)
 			if (tecla) {
 				switch (tecla) {
 				case 1:
-					srand(time(NULL));
-					int x = 1 + (rand() % 6);
-						int cardNumero = rand() % 20;
+					x = 1 + (rand() % 4);
+					int cardNumero = array[c];
 					char i[10];
 					snprintf(i, 10, "%d", x);
 					al_draw_textf(fonte, al_map_rgb(0, 0, 0), 1125, 480, ALLEGRO_ALIGN_CENTRE, i);
@@ -306,12 +324,14 @@ int main(void)
 					casa += x;
 					if (casa >= 7) {
 						tela = FASE_CIDADE;
+
 						casa = 7;
 					}
 					cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero], &posicoes[casa]);
 					break;
 					tecla = 0;
 				}
+				c++;
 				tecla = 0;
 				break;
 			}
@@ -319,7 +339,6 @@ int main(void)
 		case 4:
 			al_draw_bitmap(IMAGEM_FASE2, 0, 0, 0);
 			andaJacare(&posicoes[casa]);
-			tecla = 0;
 			al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 490, 635, ALLEGRO_ALIGN_CENTRE, pressSpace);
 			al_flip_display();
 			al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
@@ -335,9 +354,8 @@ int main(void)
 			if (tecla) {
 				switch (tecla) {
 				case 1:
-					srand(time(NULL));
-					int x = 1 + (rand() % 4);
-					int cardNumero = rand() % 20;
+					x = 1 + (rand() % 3);
+					int cardNumero = array[c];
 					char i[10];
 					sprintf_s(i, 10, "%d", x);
 					al_draw_textf(fonte, al_map_rgb(0, 0, 0), 355, 135, ALLEGRO_ALIGN_CENTRE, i);
@@ -355,6 +373,7 @@ int main(void)
 					break;
 
 				}
+				c++;
 				tecla = 0;
 				break;
 			}
@@ -362,7 +381,6 @@ int main(void)
 		case 5:
 			al_draw_bitmap(IMAGEM_FASE3, 0, 0, 0);
 			andaJacare(&posicoes[casa]);
-			tecla = 0;
 			al_draw_textf(fonteSpace, al_map_rgb(0, 0, 0), 235, 422, ALLEGRO_ALIGN_CENTRE, pressSpace);
 			al_flip_display();
 
@@ -380,9 +398,8 @@ int main(void)
 
 				switch (tecla) {
 				case 1:
-					srand(time(NULL));
-					int x = 1 + (rand() % 2);
-					int cardNumero = rand() % 20;
+					x = 1 + (rand() % 1);
+					int cardNumero = array[c];
 					char i[10];
 					sprintf_s(i, 10, "%d", x);
 					int temp = casa;
@@ -400,8 +417,8 @@ int main(void)
 					}
 					else {
 						cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero], &posicoes[casa]);
+						c++;
 					}
-
 					al_flip_display();
 					break;
 
@@ -418,9 +435,9 @@ int main(void)
 
 			if (evento.type == ALLEGRO_EVENT_MOUSE_AXES)
 			{
-				int btn_voltar = botoesFunction(evento, 30, 90, 90, 140);
+				int btn_voltar_opcoes = botoesFunction(evento, 30, 90, 90, 140);
 
-				if (btn_voltar)
+				if (btn_voltar_opcoes)
 				{
 					al_set_system_mouse_cursor(janela, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
 				}
@@ -432,8 +449,8 @@ int main(void)
 			}
 			else if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP)
 			{
-				int btn_voltar = botoesFunction(evento, 30, 90, 90, 140);
-				if (btn_voltar) tela = TELA_OPCOES;
+				int btn_voltar_opcoes = botoesFunction(evento, 30, 90, 90, 140);
+				if (btn_voltar_opcoes) { tela = TELA_OPCOES; }
 			}
 			break;
 		case 8:
