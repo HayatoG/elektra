@@ -32,10 +32,11 @@ void cardFunction(ALLEGRO_EVENT evento, ALLEGRO_BITMAP *cartao, int x, int y, st
 
 	ALLEGRO_COLOR preto = al_map_rgb(0, 0, 0);
 	ALLEGRO_COLOR verde = al_map_rgb(255, 255, 255);
-	fonteCard = al_load_font("fontePedra.ttf", 24, 0);
+	fonteCard = al_load_font("fontePedra.ttf", 23, 0);
+	fonteCardPergunta = al_load_font("fontePedra.ttf", 26, 0);
 
 	al_draw_bitmap(cartao, x, y, 0);
-	al_draw_multiline_text(fonteCard, verde, 555, 120, 230, 50, 0, cardsStruct->perguntas);
+	al_draw_multiline_text(fonteCardPergunta, verde, 555, 120, 250, 50, 0, cardsStruct->perguntas);
 	al_draw_multiline_text(fonteCard, preto, 540, 380, 230, 40, 0, cardsStruct->resposta1);
 	al_draw_multiline_text(fonteCard, preto, 540, 480, 230, 40, 0, cardsStruct->resposta2);
 	al_draw_multiline_text(fonteCard, preto, 540, 580, 230, 40, 0, cardsStruct->resposta3);
@@ -73,12 +74,6 @@ void cardFunction(ALLEGRO_EVENT evento, ALLEGRO_BITMAP *cartao, int x, int y, st
 				}
 				else {
 					printf("Resposta errada");
-					char tcaixa[50] = "Aviso!!";
-					char titulo[100] = "Resposta errada";
-					char texto[200] = "A reposta escolhida está errada! Tente novamente!";
-					//mostra a caixa de texto
-					//int r = al_show_native_message_box(NULL, tcaixa, titulo, texto, NULL, ALLEGRO_MESSAGEBOX_WARN);
-					//printf("%i", r);
 					al_draw_bitmap(IMAGEM_AVISO, 0, 0, 0);
 					al_flip_display();
 					al_rest(2);
@@ -100,9 +95,9 @@ int main(void)
 {
 	structCards carta[] = {
 		{"What this expression “Strike while the iron is hot.” means?", "a) “Sua batata tá esquentando”", "b) “A coisa tá feia”", "c) “Aproveite enquanto é tempo”",  y_inicial_c, y_final_c},
-		{"What this expression “That’s hardly the issue.” means?", "a) “Essa é uma questão difícil”", "b) “Isso não vem ao caso”", "c) “Isso é mais difícil ",  y_inicial_b, y_final_b},
+		{"What this expression “That’s hardly the issue.” means?", "a) “Essa é uma questão difícil”", "b) “Isso não vem ao caso”", "c) “Isso é mais difícil”",  y_inicial_b, y_final_b},
 		{"What this expression “I got out of bed on the wrong side.” means?", "a) “Levantei com o pé esquerdo”","b) “Cai da cama nessa manhã”","c) “Sai da cama pelo lado errado”",  y_inicial_a, y_final_a},
-		{"What this expression “A bird in the hand is worth two in the bush.” means?", "a) “Deixa ir”", "b) “Os dois pássaros são bonitos.”", "c) “Mais vale um pássaro na mão do que dois voando.”",  y_inicial_c, y_final_c},
+		{"What this expression “A bird in the hand is worth two in the bush.” means?", "a) “Mais vale um pássaro na mão do que dois voando.”", "b) “Os dois pássaros são bonitos.”", "c) “Deixa ir.”",  y_inicial_a, y_final_a},
 		{"Complete the phrase “___ we ___ enough time to savage this love” ","a) Do/had","b) Does/has","c) Do/have",  y_inicial_c, y_final_c},
 		{"Complete the phrase “___ I go to the ______” ","a) May/bathroom","b) May/restroom","c) Do/restroom",  y_inicial_b, y_final_b},
 		{"Complete the phrase “ __ ___ a student?” ","a) Do/you","b) Are/you","c) Does/you",  y_inicial_b, y_final_b},
