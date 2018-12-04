@@ -133,7 +133,7 @@ int main(void)
 	int array[20];
 	int c;
 	int x;
-	
+
 	srand(time(NULL));
 	for (c = 0; c < 20; c++) {
 		array[c] = c + 1;
@@ -324,7 +324,7 @@ int main(void)
 					casa += x;
 					if (casa >= 7) {
 						tela = FASE_CIDADE;
-				
+
 						casa = 7;
 					}
 					cardFunction(evento, IMAGEM_CARD, 355, 0, &carta[cardNumero], &posicoes[casa]);
