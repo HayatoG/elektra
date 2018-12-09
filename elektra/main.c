@@ -96,7 +96,7 @@ int main(void)
 		{"What this expression “I got out of bed on the wrong side.” means?", "a) “Levantei com o pé esquerdo”","b) “Cai da cama nessa manhã”","c) “Sai da cama pelo lado errado”",  y_inicial_a, y_final_a},
 		{"What this expression “A bird in the hand is worth two in the bush.” means?", "a) “Mais vale um pássaro na mão do que dois voando.”", "b) “Os dois pássaros são bonitos.”", "c) “Deixa ir.”",  y_inicial_a, y_final_a},
 		{"Complete the phrase “___ we ___ enough time to savage this love” ","a) Do/had","b) Does/has","c) Do/have",  y_inicial_c, y_final_c},
-		{"Complete the phrase “___ I go to the ______” ","a) May/bathroom","b) May/restroom","c) Do/restroom",  y_inicial_b, y_final_b},
+		{"Complete the phrase “___ I go to the ______?” ","a) May/bathroom","b) May/restroom","c) Do/restroom",  y_inicial_b, y_final_b},
 		{"Complete the phrase “ __ ___ a student?” ","a) Do/you","b) Are/you","c) Does/you",  y_inicial_b, y_final_b},
 		{"Translate this phrase “What do you want to do tomorrow?”","a) O que você vai fazer amanhã?","b) Você quer fazer algo amanhã?","c) O que você quer fazer amanhã?",  y_inicial_c, y_final_c},
 		{"Translate this phrase “I wanna live like a star” ","a) Eu quero ser uma estrela","b) Eu quero viver como uma estrela","c) Eu sou uma estrela",  y_inicial_b, y_final_b},
